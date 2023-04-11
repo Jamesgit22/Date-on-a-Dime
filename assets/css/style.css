@@ -70,3 +70,7 @@ width: 20%
     color: #F5DCB1;
     font-family: bold;
 }
+
+.hidden {
+    display: none;
+}
