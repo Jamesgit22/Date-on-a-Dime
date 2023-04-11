@@ -6,3 +6,7 @@ object-fit: cover;
 padding: -20px!important;
 
 }
+
+.navbar-item img {
+    max-height: 2.5rem;
+}
