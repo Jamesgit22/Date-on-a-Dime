@@ -46,6 +46,22 @@ $(document).ready(function () {
         $(".navbar-menu").toggleClass("is-active");
   
     });
+
+
+  // Click event for Welcome button to hide first welcome card
+  document.querySelector("#start-btn").addEventListener("click", function(e) {
+    e.stopPropagation();
+    const startContainer = document.querySelector("#start-card");
+    startContainer.setAttribute("style", "display: none;");
+    locationCard();
+  })
+
+  function locationCard() {
+    const locationCardCont = document.querySelector("#main-container");
+    locationCardCont.classList.remove("hidden");
+  }
+
+
 });
 
 
