@@ -11,6 +11,7 @@
     --dark-red: #8e0a3b;
     --plum: #64042C;
     --dark-brown: #452C34;
+    --champaign: #f9e8ca;
 }
 
 body {
@@ -60,7 +61,7 @@ width: 20%
 
 #testing-card {
     width: 350px;
-    height: 300px;
+    height: 255px;
     align-self: center;
     margin-left: 4em;
     background-color: #0000005e; 
@@ -71,9 +72,9 @@ width: 20%
 }
 
 #testing-card h1 {
-    color: #f9e8ca;
-    font-family: bold;
-     font-size: 2.5em;
+    color: var(--champaign);
+    font-weight: bold;
+    font-size: 2.3em;
 }
 
 #testing-card p {
@@ -84,4 +85,17 @@ width: 20%
 
 .hidden {
     display: none;
+}
+
+#start-btn {
+    width: 100%;
+    background-color: var(--secondary-blue);
+    color: white;
+    font-weight: bold;
+    font-family: poppins;
+    font-size: 1.5em;
+}
+
+#start-btn:hover {
+    background-color: #7adff9;
 }
