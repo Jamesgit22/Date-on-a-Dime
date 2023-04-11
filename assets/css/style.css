@@ -9,6 +9,7 @@
     --dark-brown: #452C34;
 }
 
+
 .logo {
 object-fit: cover; 
 padding: -20px!important;
@@ -19,9 +20,43 @@ flex-grow: 1;
 margin: 30px; 
 position: absolute; 
 width: 20%
-=======
 }
 
 .navbar-item img {
     max-height: 2.5rem;
+}
+
+#start-container {
+    background-image: url(../images/11549398_VALENTINESDAYLIST_THUMB1_16x9.jpg);
+    width: 100vw;
+    height: 100vh;
+    background-image: fit-content;
+    background-position: center;
+}
+
+#overlay {
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.132);
+}
+
+#nav {
+    background-color: var(--dark-brown);
+}
+
+#testing-card {
+    width: 350px;
+    height: 300px;
+    align-self: center;
+    margin-left: 4em;
+    background-color: #00000002; 
+    color: whitesmoke;
+    border: solid 1px rgba(255, 255, 255, 0.475);
+    border-radius: 1em;
+    text-align: center;
+}
+
+#testing-card h1 {
+    color: #F5DCB1;
+    font-family: bold;
 }
