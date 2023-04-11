@@ -1,10 +1,17 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"; 
 
+:root {
+    --primary-pink: #f31960;
+    --secondary-blue: #25bde4;
+    --dark-blue: #106F88;
+    --dark-red: #8e0a3b;
+    --plum: #64042C;
+    --dark-brown: #452C34;
+}
 
 .logo {
 object-fit: cover; 
 padding: -20px!important;
-
 } 
 
 .container {
@@ -12,4 +19,9 @@ flex-grow: 1;
 margin: 30px; 
 position: absolute; 
 width: 20%
+=======
+}
+
+.navbar-item img {
+    max-height: 2.5rem;
 }
