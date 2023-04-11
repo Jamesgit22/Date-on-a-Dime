@@ -5,12 +5,19 @@
 $(document).ready(function () {
   console.log("ready!");
   
-  var userInput = document.querySelector(`#inputBox`);
+  let userInput = document.querySelector(`#inputBox`);
+
+//  Arrays for Yelp Search categories
+  let outdoorDates = ["parks", "tours", "active"];
+  let foodDates = ["restaurants", "gourmet", "tastingclasses"];
+  let lightHeartDates = ["artsandcrafts", "petstores", "media", "movietheaters"];
+  let artsDates = ["museums", "arts", "photographers"];
+  let nightLifeDates = ["bars", "nightlife"];
 
   // Fetch data from Yelp Fusion
   async function getJSONData() {
     const response = await fetch(
-      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=pensacola&radius=20000&categories=movietheater&sort_by=best_match&limit=20`,
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${userCity}&radius=20000&categories=arts&sort_by=best_match&limit=10`,
       {
         method: "GET",
         headers: {
@@ -22,7 +29,6 @@ $(document).ready(function () {
     const jsonData = await response.json();
     console.log(jsonData);
   }
-  getJSONData();
 
   // Fetch data from Open Weather API
   $(`#btn`).click(function (event) {
