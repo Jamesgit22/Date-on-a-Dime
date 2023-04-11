@@ -1,6 +1,8 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
   console.log("ready!");
+  
+  var userInput = document.querySelector(`#inputBox`);
 
   // Fetch data from Yelp Fusion
   async function getJSONData() {
@@ -18,4 +20,13 @@ $(document).ready(function () {
     console.log(jsonData);
   }
   getJSONData();
+
+  // Fetch data from Open Weather API
+  $(`#btn`).click(function (event) {
+    event.preventDefault()
+    fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?appid=3be2b2b6acc21e3760901d15acf91f72&q=${userInput.value}&cnt=1&units=imperial`)
+    .then(response => response.json())
+
+  })
 });
+
