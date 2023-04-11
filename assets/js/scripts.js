@@ -1,3 +1,6 @@
+
+    
+
 // A $( document ).ready() block.
 $(document).ready(function () {
   console.log("ready!");
@@ -28,5 +31,15 @@ $(document).ready(function () {
     .then(response => response.json())
 
   })
+  
+  // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function() {
+  
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        // $(".navbar-burger").toggleClass("is-active");
+        $(".navbar-menu").toggleClass("is-active");
+  
+    });
 });
+
 
