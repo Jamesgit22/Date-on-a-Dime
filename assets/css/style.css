@@ -12,7 +12,14 @@
 .logo {
 object-fit: cover; 
 padding: -20px!important;
+} 
 
+.container {
+flex-grow: 1;
+margin: 30px; 
+position: absolute; 
+width: 20%
+=======
 }
 
 .navbar-item img {
