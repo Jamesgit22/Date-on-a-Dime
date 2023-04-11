@@ -7,7 +7,9 @@ padding: -20px!important;
 
 } 
 
-.info {
-
-
+.container {
+flex-grow: 1;
+margin: 30px; 
+position: absolute; 
+width: 20%
 }
