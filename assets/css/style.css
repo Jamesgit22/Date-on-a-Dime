@@ -99,3 +99,7 @@ width: 20%
 #start-btn:hover {
     background-color: #7adff9;
 }
+
+#main-container {
+    margin: 0 auto;
+}
