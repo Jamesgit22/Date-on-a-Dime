@@ -1,18 +1,23 @@
-
-    
-
 // A $( document ).ready() block.
 $(document).ready(function () {
   console.log("ready!");
-  
+
   let userInput = document.querySelector(`#inputBox`);
 
-//  Arrays for Yelp Search categories
+  //  Arrays for Yelp Search categories
   let outdoorDates = ["parks", "tours", "active"];
   let foodDates = ["restaurants", "gourmet", "tastingclasses"];
-  let lightHeartDates = ["artsandcrafts", "petstores", "media", "movietheaters"];
+  let lightHeartDates = [
+    "artsandcrafts",
+    "petstores",
+    "media",
+    "movietheaters",
+  ];
   let artsDates = ["museums", "arts", "photographers"];
   let nightLifeDates = ["bars", "nightlife"];
+
+  // check local storage for stored items
+  const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
 
   // Fetch data from Yelp Fusion
   async function getJSONData() {
@@ -32,31 +37,28 @@ $(document).ready(function () {
 
   // Fetch data from Open Weather API
   $(`#btn`).click(function (event) {
-    event.preventDefault()
-    fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?appid=3be2b2b6acc21e3760901d15acf91f72&q=${userInput.value}&cnt=1&units=imperial`)
-    .then(response => response.json())
+    event.preventDefault();
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast/daily?appid=3be2b2b6acc21e3760901d15acf91f72&q=${userInput.value}&cnt=1&units=imperial`
+    ).then((response) => response.json());
+  });
 
-  })
-  
   // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-  
-        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-        // $(".navbar-burger").toggleClass("is-active");
-        $(".navbar-menu").toggleClass("is-active");
-  
-    });
-
+  $(".navbar-burger").click(function () {
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    // $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
 
   // Click event for Welcome button to hide first welcome card
-  document.querySelector("#start-btn").addEventListener("click", function(e) {
+  document.querySelector("#start-btn").addEventListener("click", function (e) {
     e.stopPropagation();
     const startCard = document.querySelector("#start-card");
     const bgColor = document.querySelector("#overlay");
     startCard.setAttribute("style", "display: none;");
     bgColor.setAttribute("style", "background-color: #f31960;");
     locationCard();
-  })
+  });
 
   // Show main container to ask user location
   function locationCard() {
@@ -91,7 +93,4 @@ $(document).ready(function () {
     </div>
   </div>`;
   }
-
 });
-
-

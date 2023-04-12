@@ -50,6 +50,10 @@ body {
     color: var(--dark-brown);
 }
 
+.txt-primary {
+    color: var(--primary-pink);
+}
+
 #logo {
     object-fit: contain;
     margin-left: -20px;
@@ -70,6 +74,17 @@ width: 20%
 
 .navbar-item img {
     max-height: 2.5rem;
+}
+
+#nav-fav-dates {
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.1s;
+}
+
+#nav-fav-dates:hover {
+    color: var(--champaign);
+    border-bottom: solid 1px var(--primary-pink);
 }
 
 #start-container {
