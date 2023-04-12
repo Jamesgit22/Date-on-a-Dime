@@ -62,30 +62,29 @@ $(document).ready(function () {
     document.querySelector(
       "#main-card"
     ).innerHTML = ` <div class="card-content">
+    <h1 id="cityName">Today's Forecast</h1>
     <div class="weatherDataContainer">
-      <h2 id="cityName">Today's Forecast</h2>
-      <div class="row hourBlock">
-      <div>
-        <br>
-        <img src="" alt="" id="icon">
+      <div class="hourBlock">
+      <div class="weather1">
         <p class="hour">Hour</p>
+        <img src="" alt="" id="icon">
         <p class="temp">Temp</p>
       </div>
-      <div>
-        <img src="" alt="" id="icon-1">
+      <div class="weather2">
         <p class="hour-1">Hour</p>
+        <img src="" alt="" id="icon-1">
         <p class="temp-1">Temp</p>
       </div>
-      <div>
-        <img src="" alt="" id="icon-2">
+      <div class="weather3">
         <p class="hour-2">Hour</p>
+        <img src="" alt="" id="icon-2">
         <p class="temp-2">Temp</p>
       </div>
       </div>
-      <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
+     </div> 
+     <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
       <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
       <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
-    </div>
   </div>`;
     weatherFetch();
 
@@ -102,10 +101,10 @@ $(document).ready(function () {
       clearMainC();
       indoorCard();
     });
-}  
+  }
 
   function weatherFetch() {
-    
+
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
     )
@@ -119,15 +118,16 @@ $(document).ready(function () {
 
         const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
         const hourEl = document.querySelector(`.hour`);
-        const iconEl = document.querySelector(`#icon`); 
+        const iconEl = document.querySelector(`#icon`);
         const cityName = document.querySelector(`#cityName`);
         const tempEl = document.querySelector(`.temp`);
         const time = dayjs.unix(dt).format("h A");
+        
         console.log(time);
         hourEl.innerText = time;
         iconEl.src = iconUrl;
-        cityName.innerText = `Todays Forecast in ` + location + `:`;
-        tempEl.innerText = `Temp: ` + temp + ` °F`;
+        cityName.innerText =  location + `'s Forecast:`;
+        tempEl.innerText = `Temp: ` + Math.round(temp) + ` °F`;
 
         for (let i = 1; i < data.list.length; i++) {
           let currHour = data.list[i];
@@ -138,7 +138,7 @@ $(document).ready(function () {
             .unix(currHour.dt)
             .format("h A")}`;
           document.querySelector(`.temp-${i}`).innerText =
-            `Temp: ` + currHour.main.temp + ` °F`;
+            `Temp: ` + Math.round(currHour.main.temp) + ` °F`;
           document.querySelector(`#icon-${i}`).src = Url;
         }
       });
