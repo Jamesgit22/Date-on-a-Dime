@@ -92,6 +92,14 @@ $(document).ready(function () {
     locationCard();
   });
 
+  // Click event for choosing an outdoor date
+  document.querySelector("#click-outdoor").addEventListener("click", function (e) {
+    e.stopPropagation();
+    // Card needs to be created
+  });
+
+  // Click event for choosing an indoor date
+
   // Show main container to ask user location
   function locationCard() {
     const locationCardCont = document.querySelector("#main-container");
@@ -107,8 +115,8 @@ $(document).ready(function () {
     <div class="content">
       <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
-        <button class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
-        <button class="button is-warning is-light" data-outdoor="adventure">Adventure</button>
+        <button id="click-relax" class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
+        <button id="click-adven" class="button is-warning is-light" data-outdoor="adventure">Adventure</button>
       </div>
     </div>
   </div>`;
@@ -119,8 +127,8 @@ $(document).ready(function () {
     <div class="content">
       <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
-        <button class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
-        <button class="button is-warning is-light" data-indoor="romantic">Romantic</button>
+        <button id="click-light" class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
+        <button id="click-roman" class="button is-warning is-light" data-indoor="romantic">Romantic</button>
       </div>
     </div>
   </div>`;
