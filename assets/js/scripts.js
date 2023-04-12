@@ -1,30 +1,36 @@
 // A $( document ).ready() block.
-const now = dayjs()
+const now = dayjs();
 $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`).value;
+  let cityName = document.querySelector(`#cityName`);
   let iconEl = document.querySelector(`#icon`);
   let tempEl = document.querySelector(`.temp`);
   let hourEl = document.querySelector(`.hour`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
   let startContainer = document.querySelector(`#start-container`);
-  let dateDate;
-  let DateType;
+  let dateData;
+  let dateType;
 
   //  Arrays for Yelp Search categories
-  let outdoorDates = ["parks", "tours", "active"];
-  let foodDates = ["restaurants", "gourmet", "tastingclasses"];
+  let adventureDates = ["escapegames", "tours", "active", "festivals"];
+  let relaxedDates = ["parks", "tours"];
   let lightHeartDates = [
     "artsandcrafts",
     "petstores",
     "media",
     "movietheaters",
+    "museums",
+    "arts",
   ];
-  let artsDates = ["museums", "arts", "photographers"];
-  let nightLifeDates = ["bars", "nightlife"];
+  let romanticDates = [
+    "restaurants",
+    "gourmet",
+    "photographers",
+    "tastingclasses",
+  ];
 
   // check local storage for stored items
   const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -48,16 +54,6 @@ $(document).ready(function () {
     console.log(jsonData);
   }
 
-  // Fetch data from Open Weather API
-  
-
-  // Check for click events on the navbar burger icon
-  $(".navbar-burger").click(function () {
-    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    // $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
-  });
-
   // Click event for Welcome button to hide first welcome card
   document.querySelector("#start-btn").addEventListener("click", function (e) {
     e.stopPropagation();
@@ -66,7 +62,7 @@ $(document).ready(function () {
     startCard.setAttribute("style", "display: none;");
     bgColor.setAttribute("style", "background-color: #452C34;");
 
-    locationCard()
+    locationCard();
   });
 
   //Click event for clicking search button after inputting city
@@ -75,62 +71,17 @@ $(document).ready(function () {
     weatherCardFunc();
   });
 
-  // Click event for choosing an outdoor date
-  $("#click-outdoor").click(function (e) {
-    e.stopPropagation();
-    clearMainC()
-    outdoorCard();
-  });
-
-  // Click event for choosing an indoor date
-  $("#click-indoor").click(function (e) {
-    e.stopPropagation();
-    clearMainC();
-    indoorCard();
-  });
-
-  // Click event for choosing Relaxing Outdoor date
-  $("#click-relax").click(function (e) {
-    e.stopPropagation();
-    clearMainC();
-    dateData = "relax";
-    checkDateType();
-  });
-
-  // Click event for choosing Adventure Outdoor date
-  $("#click-adven").click(function (e) {
-    e.stopPropagation();
-    clearMainC();
-    dateData = "adven";
-    checkDateType();
-  });
-
-  // Click event for choosing lightheart Indoor date
-  $("#click-lightheart").click(function (e) {
-    e.stopPropagation();
-    clearMainC();
-    dateData = "lightheart"
-    checkDateType();
-  });
-
-  // Click event for choosing Romantic Indoor date
-  $("#click-roman").click(function (e) {
-    e.stopPropagation();
-    clearMainC();
-    dateData = "roman";
-
-    checkDateType();
-  });
-
   // Show main container to ask user location
   function locationCard() {
-    let mainCont = document.querySelector(`#main-container`)
-    mainCont.classList.remove(`hidden`)
+    let mainCont = document.querySelector(`#main-container`);
+    mainCont.classList.remove(`hidden`);
   }
 
   function weatherCardFunc() {
-    clearMainC()
-    document.querySelector("#main-card").innerHTML = ` <div class="card-content">
+    clearMainC();
+    document.querySelector(
+      "#main-card"
+    ).innerHTML = ` <div class="card-content">
     <div class="weatherDataContainer">
       <h2 id="cityName">Today's Forecast</h2>
       <div class="row hourBlock">
@@ -155,39 +106,58 @@ $(document).ready(function () {
       <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
       <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
     </div>
-  </div>`
-    weatherFetch()
+  </div>`;
+    weatherFetch();
+    
+    // Click event for choosing an outdoor date
+    $("#outdoorBtn").on("click", function (e) {
+      e.stopPropagation();
+      clearMainC();
+      outdoorCard();
+    });
+
+    // Click event for choosing an indoor date
+    $("#indoorBtn").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      indoorCard();
+    });
   }
 
-  function weatherFetch () {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`)
+  function weatherFetch() {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
+    )
       .then((response) => response.json())
-      .then(data => {
-        console.log(data)
-        const { temp } = data.list[0].main
-        const location = data.city.name
-        const { icon } = data.list[0].weather[0]
-        const { dt } = data.list[0]
+      .then((data) => {
+        console.log(data);
+        const { temp } = data.list[0].main;
+        const location = data.city.name;
+        const { icon } = data.list[0].weather[0];
+        const { dt } = data.list[0];
 
-        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
+        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-        const time =  dayjs.unix(dt).format('h A');
+        const time = dayjs.unix(dt).format("h A");
         console.log(time);
         hourEl.innerText = time;
         iconEl.src = iconUrl;
-        cityName.innerText = `Todays Forecast in ` + location + `:`
-        tempEl.innerText = `Temp: ` + temp + ` °F`
-        
+        cityName.innerText = `Todays Forecast in ` + location + `:`;
+        tempEl.innerText = `Temp: ` + temp + ` °F`;
+
         for (let i = 1; i < data.list.length; i++) {
           let currHour = data.list[i];
-          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`
+          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`;
           console.log(temp);
           console.log(currHour);
-          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs.unix(currHour.dt).format('h A')}`;
-          document.querySelector(`.temp-${i}`).innerText = `Temp: ` + currHour.main.temp + ` °F`
-          document.querySelector(`#icon-${i}`).src = Url
-      }
-    })
+          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs
+            .unix(currHour.dt)
+            .format("h A")}`;
+          document.querySelector(`.temp-${i}`).innerText =
+            `Temp: ` + currHour.main.temp + ` °F`;
+          document.querySelector(`#icon-${i}`).src = Url;
+        }
+      });
   }
 
   function clearMainC() {
@@ -204,6 +174,22 @@ $(document).ready(function () {
       </div>
     </div>
   </div>`;
+
+    // Click event for choosing Relaxing Outdoor date
+    $("#click-relax").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "relax";
+      checkDateType();
+    });
+
+    // Click event for choosing Adventure Outdoor date
+    $("#click-adven").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "adven";
+      checkDateType();
+    });
   }
 
   function indoorCard() {
@@ -216,26 +202,44 @@ $(document).ready(function () {
       </div>
     </div>
   </div>`;
+
+    // Click event for choosing lightheart Indoor date
+    $("#click-lightheart").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "lightheart";
+      checkDateType();
+    });
+
+    // Click event for choosing Romantic Indoor date
+    $("#click-roman").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "roman";
+      checkDateType();
+    });
   }
 
   // check what type of date the user choose
   function checkDateType() {
-    if (dateData = "relax") {
+    if ((dateData = "relax")) {
       dateType = relaxedDates;
-      getYelpData(cityName, dateType);
-
-    } else if (dateData = "adven") {
+      pickCategory(dateType);
+    } else if ((dateData = "adven")) {
       dateType = adventureDates;
-      getYelpData(cityName, dateType);
-
-    } else if (dateData = "lightheart") {
-      dateType = adventureDates;
-      getYelpData(cityName, dateType);
-
-    } else if (dateData = "roman") {
-      dateType = adventureDates;
-      getYelpData(cityName, dateType);
+      pickCategory(dateType);
+    } else if ((dateData = "lightheart")) {
+      dateType = lightHeartDates;
+      pickCategory(dateType);
+    } else if ((dateData = "roman")) {
+      dateType = romanticDates;
+      pickCategory(dateType);
     }
   }
-});
 
+  let pickCategory = (array) => {
+    let i = Math.floor(Math.random() * array.length);
+    const resultDate = array[i];
+    getYelpData(cityName, resultDate);
+  };
+});
