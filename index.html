@@ -41,7 +41,7 @@
                   <div class="content">
                     <h1 class="txt-dbrown">Please enter your location to find<br>the best dates in your area: </h1>
                     <input type="text" id="location-input">
-                    <button class="button is-warning is-light">Search</button>
+                    <button id="searchBtn" class="button is-warning is-light">Search</button>
                   </div>
                 </div>
               </div>
@@ -49,6 +49,36 @@
           </section> 
           </div>
         </section>
+        <section id="location-container" class="hidden is-justify-content-center is-align-self-center">
+          <div id="location-card" class="card bg-cust-champ">
+            <div class="card-content">
+              <div class="weatherDataContainer">
+                <h2 id="cityName">Today's Forecast</h2>
+                <div>
+                  <p class="hour">Hour</p>
+                  <img src="" alt="" id="icon">
+                  <p class="temp">Temp</p>
+                </div>
+                <div>
+                  <p class="hour-1">Hour</p>
+                  <img src="" alt="" id="icon-1">
+                  <p class="temp-1">Temp</p>
+                </div>
+                <div>
+                  <p class="hour-2">Hour</p>
+                  <img src="" alt="" id="icon-2">
+                  <p class="temp-2">Temp</p>
+                </div>
+                <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
+                <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
+                <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
+      </div>
+    </section>
         
     </body1>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"

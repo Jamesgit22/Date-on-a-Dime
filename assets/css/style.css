@@ -124,6 +124,11 @@ width: 20%
     font-size: 2.3em;
 }
 
+.content h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
 #start-card p {
     font-weight: bold;
     padding-bottom: 20px;
