@@ -4,27 +4,29 @@ $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`).value;
+  let cityName = document.querySelector(`#cityName`);
   let iconEl = document.querySelector(`#icon`);
   let tempEl = document.querySelector(`.temp`);
   let hourEl = document.querySelector(`.hour`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
   let startContainer = document.querySelector(`#start-container`);
-  let dateDate;
-  let DateType;
+  // let dateDate;
+  let dateType;
 
   //  Arrays for Yelp Search categories
-  let outdoorDates = ["parks", "tours", "active"];
-  let foodDates = ["restaurants", "gourmet", "tastingclasses"];
+  let adventureDates = ["escapegames", "tours", "active", "festivals"];
+  let relaxedDates = ["parks", "tours"]
   let lightHeartDates = [
     "artsandcrafts",
     "petstores",
     "media",
     "movietheaters",
+    "museums",
+    "arts"
   ];
-  let artsDates = ["museums", "arts", "photographers"];
-  let nightLifeDates = ["bars", "nightlife"];
+  let romanticDates = ["restaurants", "gourmet", "photographers", "tastingclasses"];
+ 
 
   // check local storage for stored items
   const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -229,11 +231,11 @@ $(document).ready(function () {
       getYelpData(cityName, dateType);
 
     } else if (dateData = "lightheart") {
-      dateType = adventureDates;
+      dateType = lightHeartDates;
       getYelpData(cityName, dateType);
 
     } else if (dateData = "roman") {
-      dateType = adventureDates;
+      dateType = romanticDates;
       getYelpData(cityName, dateType);
     }
   }
