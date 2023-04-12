@@ -1,4 +1,5 @@
 // A $( document ).ready() block.
+const now = dayjs()
 $(document).ready(function () {
   console.log("ready!");
 
@@ -50,26 +51,31 @@ $(document).ready(function () {
 
     event.preventDefault();
 
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=2&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`)
       .then((response) => response.json())
       .then(data => {
         console.log(data)
         const { temp } = data.list[0].main
         const location = data.city.name
-        const { icon } = data.weather[0]
+        const { icon } = data.list[0].weather[0]
+        const { dt } = data.list[0]
 
         const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
 
+        const time =  dayjs.unix(dt).format('h A');
+        hourEl.innerText = time;
         iconEl.src = iconUrl;
-        cityName.innerText = `${location}`
-        tempEl.innerText = `Temperature: ` + temp + ` °F`
-
-        for (let i = 0; i < data.length; i++) {
-          let currDay = data.list[i];
-          const Url = `https://openweathermap.org/img/wn/${currDay.weather[0].icon}@2x.png`
+        cityName.innerText = `Todays Forecast in ` + location + `:`
+        tempEl.innerText = `Temp: ` + temp + ` °F`
+        
+        for (let i = 1; i < data.list.length; i++) {
+          let currHour = data.list[i];
+          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`
           console.log(temp);
+          console.log(currHour);
+          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs.unix(currHour.dt).format('h A')}`;
+          document.querySelector(`.temp-${i}`).innerText = `Temp: ` + currHour.main.temp + ` °F`
           document.querySelector(`#icon-${i}`).src = Url
-          document.querySelector(`.temp-${i}`).innerText = `Temperature: ` + currDay.temp + ` °F`
       }
     })
 
