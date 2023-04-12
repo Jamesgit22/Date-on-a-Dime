@@ -188,7 +188,7 @@ $(document).ready(function () {
   </div>`;
 
     // Click event for choosing lightheart Indoor date
-    $("#click-lightheart").click(function (e) {
+    $("#click-light").click(function (e) {
       e.stopPropagation();
       dateData = "lightheart";
       clearMainC();
