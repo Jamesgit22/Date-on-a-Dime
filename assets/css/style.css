@@ -18,6 +18,38 @@ body {
     background-color: #0c1019;
 }
 
+.bg-cust-primary {
+    background-color: var(--primary-pink);
+}
+
+.bg-cust-secondary {
+    background-color: var(--secondary-blue);
+}
+
+.bg-cust-dblue {
+    background-color: var(--dark-blue);
+}
+
+.bg-cust-dred {
+    background-color: var(--dark-red);
+}
+
+.bg-cust-plum {
+    background-color: var(--plum);
+}
+
+.bg-cust-dbrown {
+    background-color: var(--dark-brown);
+}
+
+.bg-cust-champ {
+    background-color: var(--champaign);
+}
+
+.txt-dbrown {
+    color: var(--dark-brown);
+}
+
 #logo {
     object-fit: contain;
     margin-left: -20px;
@@ -94,12 +126,32 @@ width: 20%
     font-weight: bold;
     font-family: poppins;
     font-size: 1.5em;
+    transition: 0.5s;
 }
 
 #start-btn:hover {
     background-color: #7adff9;
+    text-shadow: 0px 0px 10px var(--dark-blue);
 }
 
 #main-container {
     margin: 0 auto;
+}
+
+#main-card {
+    text-align: center;
+    border: solid 1px var(--secondary-blue);
+    box-shadow: 0px 0px 50px var(--plum);
+}
+
+#location-input {
+    font-size: 30px;
+    color: var(--dark-brown);
+    border: solid 1px var(--secondary-blue);
+    border-radius: 5px;
+
+}
+
+#location-input:focus {
+    border-color: red;
 }
