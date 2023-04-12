@@ -51,11 +51,14 @@ $(document).ready(function () {
   // Click event for Welcome button to hide first welcome card
   document.querySelector("#start-btn").addEventListener("click", function(e) {
     e.stopPropagation();
-    const startContainer = document.querySelector("#start-card");
-    startContainer.setAttribute("style", "display: none;");
+    const startCard = document.querySelector("#start-card");
+    const startContainer = document.querySelector("#start-container");
+    startCard.setAttribute("style", "display: none;");
+    startContainer.setAttribute("style", "background-image: none;");
     locationCard();
   })
 
+  // Show main container to ask user location
   function locationCard() {
     const locationCardCont = document.querySelector("#main-container");
     locationCardCont.classList.remove("hidden");
