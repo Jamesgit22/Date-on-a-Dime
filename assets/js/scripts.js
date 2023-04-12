@@ -4,7 +4,7 @@ $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`);
+
   let iconEl = document.querySelector(`#icon`);
   let tempEl = document.querySelector(`.temp`);
   let hourEl = document.querySelector(`.hour`);
@@ -13,10 +13,12 @@ $(document).ready(function () {
   let startContainer = document.querySelector(`#start-container`);
   let dateData;
   let dateType;
+  let userCity;
+  let yelpData;
 
   //  Arrays for Yelp Search categories
   let adventureDates = ["escapegames", "tours", "active", "festivals"];
-  let relaxedDates = ["parks", "tours"];
+  let relaxedDates = ["parks"];
   let lightHeartDates = [
     "artsandcrafts",
     "petstores",
@@ -35,25 +37,6 @@ $(document).ready(function () {
   // check local storage for stored items
   const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
 
-  // Fetch data from Yelp Fusion
-  async function getYelpData(city, type) {
-    city = cityName;
-    type = dateType;
-
-    const response = await fetch(
-      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=best_match&limit=10`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer 6qR4_DRix9tgxR-wMhc5CZxksBaAi7-kad8A147whk73CqEO0g_2KhKnIyk8PkGGMuZAQIBF3VNetKKXTuqg1g0B-2dDLnu9FPV8-IA-j7W5fhsh5Jm_6-i-1S80ZHYx",
-        },
-      }
-    );
-    const jsonData = await response.json();
-    console.log(jsonData);
-  }
-
   // Click event for Welcome button to hide first welcome card
   document.querySelector("#start-btn").addEventListener("click", function (e) {
     e.stopPropagation();
@@ -65,16 +48,17 @@ $(document).ready(function () {
     locationCard();
   });
 
-  //Click event for clicking search button after inputting city
-  $(`#searchBtn`).click(function (e) {
-    e.stopPropagation();
-    weatherCardFunc();
-  });
-
   // Show main container to ask user location
   function locationCard() {
     let mainCont = document.querySelector(`#main-container`);
     mainCont.classList.remove(`hidden`);
+    //Click event for clicking search button after inputting city
+    $(`#searchBtn`).click(function (e) {
+      e.stopPropagation();
+      userCity = document.querySelector(`#location-input`).value;
+      console.log(userCity);
+      weatherCardFunc();
+    });
   }
 
   function weatherCardFunc() {
@@ -108,7 +92,7 @@ $(document).ready(function () {
     </div>
   </div>`;
     weatherFetch();
-    
+
     // Click event for choosing an outdoor date
     $("#outdoorBtn").on("click", function (e) {
       e.stopPropagation();
@@ -206,19 +190,54 @@ $(document).ready(function () {
     // Click event for choosing lightheart Indoor date
     $("#click-lightheart").click(function (e) {
       e.stopPropagation();
-      clearMainC();
       dateData = "lightheart";
+      clearMainC();
       checkDateType();
     });
 
     // Click event for choosing Romantic Indoor date
     $("#click-roman").click(function (e) {
       e.stopPropagation();
-      clearMainC();
       dateData = "roman";
+      clearMainC();
       checkDateType();
     });
   }
+
+  // Fetch data from Yelp Fusion
+  async function getYelpData(city, type) {
+    const response = await fetch(
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=best_match&limit=10`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer 6qR4_DRix9tgxR-wMhc5CZxksBaAi7-kad8A147whk73CqEO0g_2KhKnIyk8PkGGMuZAQIBF3VNetKKXTuqg1g0B-2dDLnu9FPV8-IA-j7W5fhsh5Jm_6-i-1S80ZHYx",
+        },
+      }
+    );
+    yelpData = await response.json();
+    yourDatePicker(yelpData);
+    userCity = "";
+    resultDateArray = [];
+    yelpData = "";
+    finalDate = "";
+  }
+
+  let pickCategory = (array) => {
+    let i = Math.floor(Math.random() * array.length);
+    const resultDateArray = array[i];
+    getYelpData(userCity, resultDateArray);
+    console.log(resultDateArray);
+  };
+
+  // Choose final date result from Yelp JSON options
+  let yourDatePicker = () => {
+    console.log(yelpData);
+    let i = Math.floor(Math.random() * 10);
+    const finalDate = yelpData.businesses[i].name;
+    console.log(finalDate);
+  };
 
   // check what type of date the user choose
   function checkDateType() {
@@ -236,10 +255,4 @@ $(document).ready(function () {
       pickCategory(dateType);
     }
   }
-
-  let pickCategory = (array) => {
-    let i = Math.floor(Math.random() * array.length);
-    const resultDate = array[i];
-    getYelpData(cityName, resultDate);
-  };
 });
