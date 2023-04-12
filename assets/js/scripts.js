@@ -4,13 +4,15 @@ $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`);
+  let cityName = document.querySelector(`#cityName`).value;
   let iconEl = document.querySelector(`#icon`);
   let tempEl = document.querySelector(`.temp`);
   let hourEl = document.querySelector(`.hour`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
   let startContainer = document.querySelector(`#start-container`);
+  let dateDate;
+  let DateType;
 
   //  Arrays for Yelp Search categories
   let outdoorDates = ["parks", "tours", "active"];
@@ -28,9 +30,12 @@ $(document).ready(function () {
   const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
 
   // Fetch data from Yelp Fusion
-  async function getJSONData() {
+  async function getYelpData(city, type) {
+    city = cityName;
+    type = dateType;
+
     const response = await fetch(
-      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${userCity}&radius=20000&categories=arts&sort_by=best_match&limit=10`,
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=best_match&limit=10`,
       {
         method: "GET",
         headers: {
@@ -116,28 +121,33 @@ $(document).ready(function () {
   document.querySelector("#click-relax").addEventListener("click", function (e) {
     e.stopPropagation();
     clearMainC();
-    // Call modal with result
+    dateData = "relax";
+    checkDateType();
   });
 
   // Click event for choosing Adventure Outdoor date
   document.querySelector("#click-adven").addEventListener("click", function (e) {
     e.stopPropagation();
     clearMainC();
-    // Call modal with result
+    dateData = "adven";
+    checkDateType();
   });
 
   // Click event for choosing lightheart Indoor date
   document.querySelector("#click-lightheart").addEventListener("click", function (e) {
     e.stopPropagation();
     clearMainC();
-    // Call modal with result
+    dateData = "lightheart"
+    checkDateType();
   });
 
   // Click event for choosing Romantic Indoor date
   document.querySelector("#click-roman").addEventListener("click", function (e) {
     e.stopPropagation();
     clearMainC();
-    // Call modal with result
+    dateData = "roman";
+
+    checkDateType();
   });
 
   // Show main container to ask user location
@@ -172,6 +182,26 @@ $(document).ready(function () {
       </div>
     </div>
   </div>`;
+  }
+
+  // check what type of date the user choose
+  function checkDateType() {
+    if (dateData = "relax") {
+      dateType = relaxedDates;
+      getYelpData(cityName, dateType);
+
+    } else if (dateData = "adven") {
+      dateType = adventureDates;
+      getYelpData(cityName, dateType);
+
+    } else if (dateData = "lightheart") {
+      dateType = adventureDates;
+      getYelpData(cityName, dateType);
+
+    } else if (dateData = "roman") {
+      dateType = adventureDates;
+      getYelpData(cityName, dateType);
+    }
   }
 });
 
