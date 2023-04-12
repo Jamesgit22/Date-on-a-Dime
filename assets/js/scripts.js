@@ -2,7 +2,14 @@
 $(document).ready(function () {
   console.log("ready!");
 
-  let userInput = document.querySelector(`#inputBox`);
+  let userInput = document.querySelector(`#location-input`);
+  let cityName = document.querySelector(`#cityName`);
+  let iconEl = document.querySelector(`#icon`);
+  let tempEl = document.querySelector(`.temp`);
+  let hourEl = document.querySelector(`.hour`);
+  let locationContainer = document.querySelector(`#location-container`);
+  let mainContainer = document.querySelector(`#main-container`);
+  let startContainer = document.querySelector(`#start-container`);
 
   //  Arrays for Yelp Search categories
   let outdoorDates = ["parks", "tours", "active"];
@@ -36,11 +43,36 @@ $(document).ready(function () {
   }
 
   // Fetch data from Open Weather API
-  $(`#btn`).click(function (event) {
+  $(`#searchBtn`).click(function (event) {
+    startContainer.classList.add(`hidden`);
+    mainContainer.classList.add(`hidden`);
+    locationContainer.classList.remove(`hidden`);
+
     event.preventDefault();
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast/daily?appid=3be2b2b6acc21e3760901d15acf91f72&q=${userInput.value}&cnt=1&units=imperial`
-    ).then((response) => response.json());
+
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=2&units=imperial`)
+      .then((response) => response.json())
+      .then(data => {
+        console.log(data)
+        const { temp } = data.list[0].main
+        const location = data.city.name
+        const { icon } = data.weather[0]
+
+        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
+
+        iconEl.src = iconUrl;
+        cityName.innerText = `${location}`
+        tempEl.innerText = `Temperature: ` + temp + ` °F`
+
+        for (let i = 0; i < data.length; i++) {
+          let currDay = data.list[i];
+          const Url = `https://openweathermap.org/img/wn/${currDay.weather[0].icon}@2x.png`
+          console.log(temp);
+          document.querySelector(`#icon-${i}`).src = Url
+          document.querySelector(`.temp-${i}`).innerText = `Temperature: ` + currDay.temp + ` °F`
+      }
+    })
+
   });
 
   // Check for click events on the navbar burger icon
@@ -56,7 +88,7 @@ $(document).ready(function () {
     const startCard = document.querySelector("#start-card");
     const bgColor = document.querySelector("#overlay");
     startCard.setAttribute("style", "display: none;");
-    bgColor.setAttribute("style", "background-color: #f31960;");
+    bgColor.setAttribute("style", "background-color: #452C34;");
     locationCard();
   });
 

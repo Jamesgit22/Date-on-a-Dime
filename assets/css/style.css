@@ -72,6 +72,9 @@ position: absolute;
 width: 20%
 }
 
+nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+}
 .navbar-item img {
     max-height: 2.5rem;
 }
@@ -124,6 +127,11 @@ width: 20%
     font-size: 2.3em;
 }
 
+.content h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
 #start-card p {
     font-weight: bold;
     padding-bottom: 20px;
@@ -168,4 +176,8 @@ width: 20%
 
 #location-input:focus {
     border-color: red;
+}
+
+.loccard {
+    width: 20%;
 }
