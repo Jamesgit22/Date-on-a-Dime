@@ -101,10 +101,44 @@ $(document).ready(function () {
   // Click event for choosing an outdoor date
   document.querySelector("#click-outdoor").addEventListener("click", function (e) {
     e.stopPropagation();
-    // Card needs to be created
+    clearMainC()
+    outdoorCard();
   });
 
   // Click event for choosing an indoor date
+  document.querySelector("#click-indoor").addEventListener("click", function (e) {
+    e.stopPropagation();
+    clearMainC();
+    indoorCard();
+  });
+
+  // Click event for choosing Relaxing Outdoor date
+  document.querySelector("#click-relax").addEventListener("click", function (e) {
+    e.stopPropagation();
+    clearMainC();
+    // Call modal with result
+  });
+
+  // Click event for choosing Adventure Outdoor date
+  document.querySelector("#click-adven").addEventListener("click", function (e) {
+    e.stopPropagation();
+    clearMainC();
+    // Call modal with result
+  });
+
+  // Click event for choosing lightheart Indoor date
+  document.querySelector("#click-lightheart").addEventListener("click", function (e) {
+    e.stopPropagation();
+    clearMainC();
+    // Call modal with result
+  });
+
+  // Click event for choosing Romantic Indoor date
+  document.querySelector("#click-roman").addEventListener("click", function (e) {
+    e.stopPropagation();
+    clearMainC();
+    // Call modal with result
+  });
 
   // Show main container to ask user location
   function locationCard() {
@@ -140,3 +174,4 @@ $(document).ready(function () {
   </div>`;
   }
 });
+
