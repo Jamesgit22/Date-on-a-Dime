@@ -4,10 +4,6 @@ $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`);
-  let iconEl = document.querySelector(`#icon`);
-  let tempEl = document.querySelector(`.temp`);
-  let hourEl = document.querySelector(`.hour`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
   let startContainer = document.querySelector(`#start-container`);
@@ -108,7 +104,7 @@ $(document).ready(function () {
     </div>
   </div>`;
     weatherFetch();
-    
+
     // Click event for choosing an outdoor date
     $("#outdoorBtn").on("click", function (e) {
       e.stopPropagation();
@@ -122,9 +118,10 @@ $(document).ready(function () {
       clearMainC();
       indoorCard();
     });
-  }
+}  
 
   function weatherFetch() {
+    
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
     )
@@ -137,7 +134,10 @@ $(document).ready(function () {
         const { dt } = data.list[0];
 
         const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
-
+        const hourEl = document.querySelector(`.hour`);
+        const iconEl = document.querySelector(`#icon`); 
+        const cityName = document.querySelector(`#cityName`);
+        const tempEl = document.querySelector(`.temp`);
         const time = dayjs.unix(dt).format("h A");
         console.log(time);
         hourEl.innerText = time;
