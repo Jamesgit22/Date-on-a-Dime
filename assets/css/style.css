@@ -140,7 +140,6 @@ width: 20%
 
 #main-card {
     text-align: center;
-    border: solid 1px var(--secondary-blue);
     box-shadow: 0px 0px 50px var(--plum);
 }
 
