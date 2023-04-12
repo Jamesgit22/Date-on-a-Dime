@@ -49,42 +49,7 @@ $(document).ready(function () {
   }
 
   // Fetch data from Open Weather API
-  $(`#searchBtn`).click(function (event) {
-    startContainer.classList.add(`hidden`);
-    mainContainer.classList.add(`hidden`);
-    locationContainer.classList.remove(`hidden`);
-
-    event.preventDefault();
-
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`)
-      .then((response) => response.json())
-      .then(data => {
-        console.log(data)
-        const { temp } = data.list[0].main
-        const location = data.city.name
-        const { icon } = data.list[0].weather[0]
-        const { dt } = data.list[0]
-
-        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
-
-        const time =  dayjs.unix(dt).format('h A');
-        hourEl.innerText = time;
-        iconEl.src = iconUrl;
-        cityName.innerText = `Todays Forecast in ` + location + `:`
-        tempEl.innerText = `Temp: ` + temp + ` °F`
-        
-        for (let i = 1; i < data.list.length; i++) {
-          let currHour = data.list[i];
-          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`
-          console.log(temp);
-          console.log(currHour);
-          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs.unix(currHour.dt).format('h A')}`;
-          document.querySelector(`.temp-${i}`).innerText = `Temp: ` + currHour.main.temp + ` °F`
-          document.querySelector(`#icon-${i}`).src = Url
-      }
-    })
-
-  });
+  
 
   // Check for click events on the navbar burger icon
   $(".navbar-burger").click(function () {
@@ -100,25 +65,32 @@ $(document).ready(function () {
     const bgColor = document.querySelector("#overlay");
     startCard.setAttribute("style", "display: none;");
     bgColor.setAttribute("style", "background-color: #452C34;");
-    locationCard();
+
+    locationCard()
+  });
+
+  //Click event for clicking search button after inputting city
+  $(`#searchBtn`).click(function (e) {
+    e.stopPropagation();
+    weatherCardFunc();
   });
 
   // Click event for choosing an outdoor date
-  document.querySelector("#click-outdoor").addEventListener("click", function (e) {
+  $("#click-outdoor").click(function (e) {
     e.stopPropagation();
     clearMainC()
     outdoorCard();
   });
 
   // Click event for choosing an indoor date
-  document.querySelector("#click-indoor").addEventListener("click", function (e) {
+  $("#click-indoor").click(function (e) {
     e.stopPropagation();
     clearMainC();
     indoorCard();
   });
 
   // Click event for choosing Relaxing Outdoor date
-  document.querySelector("#click-relax").addEventListener("click", function (e) {
+  $("#click-relax").click(function (e) {
     e.stopPropagation();
     clearMainC();
     dateData = "relax";
@@ -126,7 +98,7 @@ $(document).ready(function () {
   });
 
   // Click event for choosing Adventure Outdoor date
-  document.querySelector("#click-adven").addEventListener("click", function (e) {
+  $("#click-adven").click(function (e) {
     e.stopPropagation();
     clearMainC();
     dateData = "adven";
@@ -134,7 +106,7 @@ $(document).ready(function () {
   });
 
   // Click event for choosing lightheart Indoor date
-  document.querySelector("#click-lightheart").addEventListener("click", function (e) {
+  $("#click-lightheart").click(function (e) {
     e.stopPropagation();
     clearMainC();
     dateData = "lightheart"
@@ -142,7 +114,7 @@ $(document).ready(function () {
   });
 
   // Click event for choosing Romantic Indoor date
-  document.querySelector("#click-roman").addEventListener("click", function (e) {
+  $("#click-roman").click(function (e) {
     e.stopPropagation();
     clearMainC();
     dateData = "roman";
@@ -152,8 +124,70 @@ $(document).ready(function () {
 
   // Show main container to ask user location
   function locationCard() {
-    const locationCardCont = document.querySelector("#main-container");
-    locationCardCont.classList.remove("hidden");
+    let mainCont = document.querySelector(`#main-container`)
+    mainCont.classList.remove(`hidden`)
+  }
+
+  function weatherCardFunc() {
+    clearMainC()
+    document.querySelector("#main-card").innerHTML = ` <div class="card-content">
+    <div class="weatherDataContainer">
+      <h2 id="cityName">Today's Forecast</h2>
+      <div class="row hourBlock">
+      <div>
+        <br>
+        <img src="" alt="" id="icon">
+        <p class="hour">Hour</p>
+        <p class="temp">Temp</p>
+      </div>
+      <div>
+        <img src="" alt="" id="icon-1">
+        <p class="hour-1">Hour</p>
+        <p class="temp-1">Temp</p>
+      </div>
+      <div>
+        <img src="" alt="" id="icon-2">
+        <p class="hour-2">Hour</p>
+        <p class="temp-2">Temp</p>
+      </div>
+      </div>
+      <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
+      <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
+      <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
+    </div>
+  </div>`
+    weatherFetch()
+  }
+
+  function weatherFetch () {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`)
+      .then((response) => response.json())
+      .then(data => {
+        console.log(data)
+        const { temp } = data.list[0].main
+        const location = data.city.name
+        const { icon } = data.list[0].weather[0]
+        const { dt } = data.list[0]
+
+        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
+
+        const time =  dayjs.unix(dt).format('h A');
+        console.log(time);
+        hourEl.innerText = time;
+        iconEl.src = iconUrl;
+        cityName.innerText = `Todays Forecast in ` + location + `:`
+        tempEl.innerText = `Temp: ` + temp + ` °F`
+        
+        for (let i = 1; i < data.list.length; i++) {
+          let currHour = data.list[i];
+          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`
+          console.log(temp);
+          console.log(currHour);
+          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs.unix(currHour.dt).format('h A')}`;
+          document.querySelector(`.temp-${i}`).innerText = `Temp: ` + currHour.main.temp + ` °F`
+          document.querySelector(`#icon-${i}`).src = Url
+      }
+    })
   }
 
   function clearMainC() {
