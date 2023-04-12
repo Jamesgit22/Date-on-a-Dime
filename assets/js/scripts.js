@@ -204,6 +204,24 @@ $(document).ready(function () {
     });
   }
 
+  // check what type of date the user choose
+  function checkDateType() {
+    if (dateData == "relax") {
+      dateType = relaxedDates;
+      pickCategory(dateType);
+    } else if (dateData == "adven") {
+      dateType = adventureDates;
+      pickCategory(dateType);
+    } else if (dateData == "lightheart") {
+      dateType = lightHeartDates;
+      pickCategory(dateType);
+    } else if (dateData == "roman") {
+      dateType = romanticDates;
+      pickCategory(dateType);
+    }
+    console.log(dateData);
+  }
+
   // Fetch data from Yelp Fusion
   async function getYelpData(city, type) {
     const response = await fetch(
@@ -238,21 +256,4 @@ $(document).ready(function () {
     const finalDate = yelpData.businesses[i].name;
     console.log(finalDate);
   };
-
-  // check what type of date the user choose
-  function checkDateType() {
-    if ((dateData = "relax")) {
-      dateType = relaxedDates;
-      pickCategory(dateType);
-    } else if ((dateData = "adven")) {
-      dateType = adventureDates;
-      pickCategory(dateType);
-    } else if ((dateData = "lightheart")) {
-      dateType = lightHeartDates;
-      pickCategory(dateType);
-    } else if ((dateData = "roman")) {
-      dateType = romanticDates;
-      pickCategory(dateType);
-    }
-  }
 });
