@@ -72,6 +72,9 @@ position: absolute;
 width: 20%
 }
 
+nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+}
 .navbar-item img {
     max-height: 2.5rem;
 }
@@ -173,4 +176,8 @@ width: 20%
 
 #location-input:focus {
     border-color: red;
+}
+
+.loccard {
+    width: 20%;
 }

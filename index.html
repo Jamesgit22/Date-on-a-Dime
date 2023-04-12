@@ -15,7 +15,7 @@
 <body>
     <div id="body-one">
         <header>
-            <nav id="nav" role="navigation" aria-label="main navigation">
+            <nav id="nav" class="is-bordered" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand is-flex is-justify-content-space-between">
                     <a class="navbar-item" href="./index.html">
                         <img src="./assets/images/date-on-a-dime-logo (4).png" id="logo" width="112" height="110"> <p class="navtext">Date on a Dime</p>
@@ -49,11 +49,12 @@
           </section> 
           </div>
         </section>
-        <section id="location-container" class="hidden is-justify-content-center is-align-self-center">
-          <div id="location-card" class="card bg-cust-champ">
+        <section id="location-container" class="hidden is-flex is-justify-content-center is-align-self-center">
+          <div id="location-card" class="loccard bg-cust-champ">
             <div class="card-content">
               <div class="weatherDataContainer">
                 <h2 id="cityName">Today's Forecast</h2>
+                <div class="row hourBlock">
                 <div>
                   <p class="hour">Hour</p>
                   <img src="" alt="" id="icon">
@@ -68,6 +69,7 @@
                   <p class="hour-2">Hour</p>
                   <img src="" alt="" id="icon-2">
                   <p class="temp-2">Temp</p>
+                </div>
                 </div>
                 <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
                 <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>

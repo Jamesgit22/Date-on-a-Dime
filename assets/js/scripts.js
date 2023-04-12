@@ -50,12 +50,12 @@ $(document).ready(function () {
 
     event.preventDefault();
 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=0&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=2&units=imperial`)
       .then((response) => response.json())
       .then(data => {
         console.log(data)
-        const { temp } = data.main
-        const location = data.name
+        const { temp } = data.list[0].main
+        const location = data.city.name
         const { icon } = data.weather[0]
 
         const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
