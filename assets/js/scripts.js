@@ -52,9 +52,9 @@ $(document).ready(function () {
   document.querySelector("#start-btn").addEventListener("click", function(e) {
     e.stopPropagation();
     const startCard = document.querySelector("#start-card");
-    const startContainer = document.querySelector("#start-container");
+    const bgColor = document.querySelector("#overlay");
     startCard.setAttribute("style", "display: none;");
-    startContainer.setAttribute("style", "background-image: none;");
+    bgColor.setAttribute("style", "background-color: #f31960;");
     locationCard();
   })
 
