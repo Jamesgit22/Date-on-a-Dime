@@ -64,6 +64,33 @@ $(document).ready(function () {
     locationCardCont.classList.remove("hidden");
   }
 
+  function clearMainC() {
+    document.querySelector("#main-card").innerHTML = ``;
+  }
+
+  function outdoorCard() {
+    document.querySelector("#main-card").innerHTML = `<div class="card-content">
+    <div class="content">
+      <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <div>
+        <button class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
+        <button class="button is-warning is-light" data-outdoor="adventure">Adventure</button>
+      </div>
+    </div>
+  </div>`;
+  }
+
+  function indoorCard() {
+    document.querySelector("#main-card").innerHTML = `<div class="card-content">
+    <div class="content">
+      <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <div>
+        <button class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
+        <button class="button is-warning is-light" data-indoor="romantic">Romantic</button>
+      </div>
+    </div>
+  </div>`;
+  }
 
 });
 
