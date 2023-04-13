@@ -53,7 +53,6 @@ $(document).ready(function () {
     $(`#searchBtn`).click(function (e) {
       e.stopPropagation();
       userCity = document.querySelector(`#location-input`).value;
-      console.log(userCity);
       weatherCardFunc();
     });
   }
@@ -118,7 +117,6 @@ $(document).ready(function () {
       })
 
       .then((data) => {
-        console.log(data);
         const { temp } = data.list[0].main;
         const location = data.city.name;
         const { icon } = data.list[0].weather[0];
@@ -130,8 +128,6 @@ $(document).ready(function () {
         const cityName = document.querySelector(`#cityName`);
         const tempEl = document.querySelector(`.temp`);
         const time = dayjs.unix(dt).format("h A");
-
-        console.log(time);
         hourEl.innerText = time;
         iconEl.src = iconUrl;
         cityName.innerText = location + `'s Forecast:`;
@@ -140,8 +136,6 @@ $(document).ready(function () {
         for (let i = 1; i < data.list.length; i++) {
           let currHour = data.list[i];
           const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`;
-          console.log(temp);
-          console.log(currHour);
           document.querySelector(`.hour-${i}`).innerHTML = `${dayjs
             .unix(currHour.dt)
             .format("h A")}`;
@@ -167,18 +161,19 @@ $(document).ready(function () {
     <div class="content">
       <h1 class="txt-dbrown">For your date outdoors, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
-        <button id="click-relax" class="button is-warning is-light call-modal" data-outdoor="relaxed">Relaxed</button>
-        <button id="click-adven" class="button is-warning is-light call-modal" data-outdoor="adventure">Adventure</button>
+        <button id="click-relax" class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
+        <button id="click-adven" class="button is-warning is-light">Adventure</button>
       </div>
-    </div>
-  </div>`;
+    </div>`;
 
+  
     // Click event for choosing Relaxing Outdoor date
     $("#click-relax").click(function (e) {
       e.stopPropagation();
       clearMainC();
       dateData = "relax";
       checkDateType();
+      openModal();
     });
 
     // Click event for choosing Adventure Outdoor date
@@ -219,6 +214,8 @@ $(document).ready(function () {
     });
   }
 
+ 
+
   // check what type of date the user choose
   function checkDateType() {
     if (dateData == "relax") {
@@ -234,7 +231,6 @@ $(document).ready(function () {
       dateType = romanticDates;
       pickCategory(dateType);
     }
-    console.log(dateData);
   }
 
   // Fetch data from Yelp Fusion
@@ -251,14 +247,6 @@ $(document).ready(function () {
     );
     yelpData = await response.json();
     yourDatePicker(yelpData);
-
-      document.querySelector(".call-modal").addEventListener('click', () => {
-        // Functions to open and close a modal
-        function openModal($el) {
-          $el.classList.add('is-active');
-        }
-      });
-      
     userCity = "";
     resultDateArray = [];
     yelpData = "";
@@ -269,7 +257,6 @@ $(document).ready(function () {
     let i = Math.floor(Math.random() * array.length);
     const resultDateArray = array[i];
     getYelpData(userCity, resultDateArray);
-    console.log(resultDateArray);
   };
 
   // Choose final date result from Yelp JSON options
@@ -282,11 +269,7 @@ $(document).ready(function () {
     console.log(rating);
     console.log(finalDate);
     getReviews(reviewObj);
-
-    let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
-    storage.push(finalDate.value)
-    localStorage.setItem(`favorites`, JSON.stringify(storage))
-  };
+    };
 
   // Get reviews for the result date
   async function getReviews(id) {
@@ -305,47 +288,6 @@ $(document).ready(function () {
       reviewOne: reviewsData.reviews[0].text,
       reviewTwo: reviewsData.reviews[1].text,
     };
-    console.log(reviews);
-  }
-
-  
-  
-    function closeModal($el) {
-      $el.classList.remove('is-active');
-    }
-  
-    function closeAllModals() {
-      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-        closeModal($modal);
-      });
-    }
-  
-    // Add a click event on buttons to open a specific modal
-    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-      const modal = $trigger.dataset.target;
-      const $target = document.getElementById(modal);
-  
-      $trigger.addEventListener('click', () => {
-        openModal($target);
-      });
-    });
-  
-    // Add a click event on various child elements to close the parent modal
-    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-      const $target = $close.closest('.modal');
-  
-      $close.addEventListener('click', () => {
-        closeModal($target);
-      });
-    });
-  
-    // Add a keyboard event to close all modals
-    document.addEventListener('keydown', (event) => {
-      const e = event || window.event;
-  
-      if (e.keyCode === 27) { // Escape key
-        closeAllModals();
-      }
-    });
+   }
   });
 
