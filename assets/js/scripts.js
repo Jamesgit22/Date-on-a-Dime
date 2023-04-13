@@ -294,4 +294,5 @@ $(document).ready(function () {
     let unhide = document.querySelector("#modal-real");
     unhide.classList.add('is-active');
   }
+  // adding something new
 });
