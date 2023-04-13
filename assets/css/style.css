@@ -346,3 +346,8 @@ p.hour,
 #modal-btns a {
     margin: 0px 4px 20px 4px;
 }
+
+#yelp-logo { 
+   border-radius: 5em;
+    
+}
