@@ -65,6 +65,12 @@ p.navtext {
     font-weight: bold;
 }
 
+p.navtextfavdates {
+    margin-left: -20px;
+    color:  var(--primary-pink);
+    font-weight: bold;
+}
+
 .container {
 flex-grow: 1;
 margin: 30px; 
@@ -107,6 +113,10 @@ nav {
 
 #nav {
     background-color: var(--dark-brown);
+}
+
+#navfav {
+    background-color: black;
 }
 
 #start-card {
