@@ -252,7 +252,7 @@ p.hour,
     background-color: #0c1019;
 } 
 
-.bar{
+.bar {
   color: #0c1019;
   background-color: #25bde4 ;
   padding-top: 15px;
@@ -272,14 +272,17 @@ opacity: 77%;
 
 .footer { 
    background-image: url(../images/istockphoto-918586890-612x612.jpg); 
-    image-rendering: crisp-edges;   
-    padding: 17%;
+    image-rendering: optimizeQuality;
+
+    padding: 19%;
     align-content: center;
 } 
 
 #redo { 
     padding-left: 20px; 
     background-color: #0c1019; 
-    color: #7adff9;
+    color:#f31960;
+    font-size: 25px; 
+    padding-top: 10px;
 }
 
