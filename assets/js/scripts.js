@@ -288,10 +288,6 @@ $(document).ready(function () {
       reviewOne: reviewsData.reviews[0].text,
       reviewTwo: reviewsData.reviews[1].text,
     };
-  }
+   }
+  });
 
-  function openModal() {
-    let unhide = document.querySelector("#modal-real");
-    unhide.classList.add('is-active');
-  }
-});
