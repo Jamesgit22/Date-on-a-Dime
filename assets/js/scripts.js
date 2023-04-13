@@ -108,7 +108,12 @@ $(document).ready(function () {
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
     )
-      .then((response) => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Please enter a valid city name. Error ' + response.status);
+      } return response.json();
+      })
+
       .then((data) => {
         console.log(data);
         const { temp } = data.list[0].main;
@@ -129,6 +134,7 @@ $(document).ready(function () {
         cityName.innerText =  location + `'s Forecast:`;
         tempEl.innerText = `Temp: ` + Math.round(temp) + ` °F`;
 
+      
         for (let i = 1; i < data.list.length; i++) {
           let currHour = data.list[i];
           const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`;
@@ -141,9 +147,14 @@ $(document).ready(function () {
             `Temp: ` + Math.round(currHour.main.temp) + ` °F`;
           document.querySelector(`#icon-${i}`).src = Url;
         }
-      });
+       
+      })
+      .catch(error => {
+        alert(error.message);
+        document.location.href="./index.html";
+      }); 
   }
-
+ 
   function clearMainC() {
     document.querySelector("#main-card").innerHTML = ``;
   }
@@ -179,7 +190,7 @@ $(document).ready(function () {
   function indoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <h1 class="txt-dbrown">For your indoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
         <button id="click-light" class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
         <button id="click-roman" class="button is-warning is-light" data-indoor="romantic">Romantic</button>
@@ -256,4 +267,5 @@ $(document).ready(function () {
     const finalDate = yelpData.businesses[i].name;
     console.log(finalDate);
   };
+
 });

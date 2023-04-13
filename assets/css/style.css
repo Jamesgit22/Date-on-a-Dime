@@ -179,7 +179,7 @@ nav {
 }
 
 h1#cityName {
-    font-size: x-large;
+    font-size: xx-large;
     font-weight: bolder;
     margin-bottom: 2%;
 }
@@ -227,3 +227,4 @@ p.hour,
 #supriseBtn {
     margin-top: 15px;
 }
+
