@@ -266,8 +266,12 @@ $(document).ready(function () {
     const finalDate = yelpData.businesses[i].name;
     const rating = yelpData.businesses[i].rating;
     const reviewObj = yelpData.businesses[i].id;
+    const urlDate = yelpData.businesses[i].image_url;
     console.log(rating);
     console.log(finalDate);
+    console.log(urlDate);
+    document.querySelector("#yelp-img").src = urlDate;
+    document.querySelector("#date-name").textContent = `${finalDate} ${"- Rating:"} ${rating}`;
     getReviews(reviewObj);
   };
 
@@ -288,6 +292,9 @@ $(document).ready(function () {
       reviewOne: reviewsData.reviews[0].text,
       reviewTwo: reviewsData.reviews[1].text,
     };
+    document.querySelector("#review-one").textContent = reviews.reviewOne;
+    document.querySelector("#review-two").textContent = reviews.reviewTwo;
+
   }
 
   function openModal() {
