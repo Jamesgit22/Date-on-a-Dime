@@ -166,7 +166,6 @@ $(document).ready(function () {
       </div>
     </div>`;
 
-
     // Click event for choosing Relaxing Outdoor date
     $("#click-relax").click(function (e) {
       e.stopPropagation();
@@ -182,6 +181,7 @@ $(document).ready(function () {
       clearMainC();
       dateData = "adven";
       checkDateType();
+      openModal();
     });
   }
 
@@ -203,6 +203,7 @@ $(document).ready(function () {
       dateData = "lightheart";
       clearMainC();
       checkDateType();
+      openModal();
     });
 
     // Click event for choosing Romantic Indoor date
@@ -211,10 +212,9 @@ $(document).ready(function () {
       dateData = "roman";
       clearMainC();
       checkDateType();
+      openModal();
     });
   }
-
-
 
   // check what type of date the user choose
   function checkDateType() {
@@ -271,19 +271,17 @@ $(document).ready(function () {
     console.log(finalDate);
     console.log(urlDate);
     document.querySelector("#yelp-img").src = urlDate;
-    document.querySelector("#date-name").textContent = `${finalDate} ${"- Rating:"} ${rating}`;
+    document.querySelector(
+      "#date-name"
+    ).textContent = `${finalDate} ${"- Rating:"} ${rating}`;
     getReviews(reviewObj);
-
     const favBtn = document.querySelector(`#modal-fav-btn`)
 
     favBtn.addEventListener("click", function () {
       let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
       storage.push(finalDate)
       localStorage.setItem(`favorites`, JSON.stringify(storage))
-  
-
     })
-
   };
 
   // Get reviews for the result date
@@ -305,17 +303,10 @@ $(document).ready(function () {
     };
     document.querySelector("#review-one").textContent = reviews.reviewOne;
     document.querySelector("#review-two").textContent = reviews.reviewTwo;
-
   }
 
   function openModal() {
     let unhide = document.querySelector("#modal-real");
-    unhide.classList.add('is-active');
-  }
- 
- 
+    unhide.classList.add("is-active");
+  } 
 });
-
-
-
-
