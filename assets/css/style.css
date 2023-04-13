@@ -226,7 +226,7 @@ p.hour,
 
 #outdoorBtn,
 #indoorBtn,
-#supriseBtn {
+#surpriseBtn {
     margin-top: 15px;
 }
 
@@ -355,4 +355,8 @@ p.hour,
 #yelp-logo { 
    border-radius: 5em;
     
+}
+
+button.clearBtn {
+    margin-top: 30px;
 }
