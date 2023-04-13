@@ -269,7 +269,7 @@ $(document).ready(function () {
     console.log(rating);
     console.log(finalDate);
     getReviews(reviewObj);
-    };
+  };
 
   // Get reviews for the result date
   async function getReviews(id) {
@@ -294,5 +294,11 @@ $(document).ready(function () {
     let unhide = document.querySelector("#modal-real");
     unhide.classList.add('is-active');
   }
-  // adding something new
+
 });
+
+
+  // let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
+  // storage.push(finalDate.value)
+  // localStorage.setItem(`favorites`, JSON.stringify(storage))
+
