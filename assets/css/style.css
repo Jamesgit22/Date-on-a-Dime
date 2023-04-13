@@ -13,6 +13,8 @@
     --dark-brown: #452C34;
     --champaign: #f9e8ca;
 }
+ 
+
 
 body {
     background-color: #0c1019;
@@ -180,4 +182,53 @@ nav {
 
 .loccard {
     width: 20%;
+} 
+
+.panel {
+    
+    background-size: contain;
+    padding-top: 15px;
+    align-items: center;
+    background-repeat: round;
+    width: 100%;
+    height: 100%; 
+    background-color: #0c1019;
+} 
+
+ .bar{
+color: #0c1019;
+background-color: #25bde4 ;
+padding-top: 15px;
+opacity: 77%;
+} 
+
+.bar1 { 
+color: #25bde4;
+background-color:#0c1019; 
+padding-top: 15px;
+opacity: 77%;
+} 
+
+
+ .navver {
+    background-blend-mode: luminosity;
+
+ }
+
+
+
+
+.footer { 
+    background-image: url(../images/istockphoto-918586890-612x612.jpg); 
+    image-rendering: crisp-edges;  
+    
+    padding: 17%;
+    align-content: center;
+} 
+
+#redo { 
+
+    padding-left: 20px; 
+    background-color: #0c1019; 
+    color: #7adff9;
 }
