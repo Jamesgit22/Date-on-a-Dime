@@ -282,6 +282,10 @@ $(document).ready(function () {
     console.log(rating);
     console.log(finalDate);
     getReviews(reviewObj);
+
+    let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
+    storage.push(finalDate.value)
+    localStorage.setItem(`favorites`, JSON.stringify(storage))
   };
 
   // Get reviews for the result date
@@ -344,4 +348,4 @@ $(document).ready(function () {
       }
     });
   });
-// });
+
