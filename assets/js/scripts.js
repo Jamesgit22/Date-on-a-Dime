@@ -167,8 +167,8 @@ $(document).ready(function () {
     <div class="content">
       <h1 class="txt-dbrown">For your date outdoors, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
-        <button id="click-relax" class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
-        <button id="click-adven" class="button is-warning is-light" data-outdoor="adventure">Adventure</button>
+        <button id="click-relax" class="button is-warning is-light call-modal" data-outdoor="relaxed">Relaxed</button>
+        <button id="click-adven" class="button is-warning is-light call-modal" data-outdoor="adventure">Adventure</button>
       </div>
     </div>
   </div>`;
@@ -196,8 +196,8 @@ $(document).ready(function () {
     <div class="content">
       <h1 class="txt-dbrown">For your date indoors, would you like to<br> have a light hearted date or something more romantic? </h1>
       <div>
-        <button id="click-light" class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
-        <button id="click-roman" class="button is-warning is-light" data-indoor="romantic">Romantic</button>
+        <button id="click-light" class="button is-warning is-light call-modal" data-indoor="lightheart">Light Hearted</button>
+        <button id="click-roman" class="button is-warning is-light call-modal " data-indoor="romantic">Romantic</button>
       </div>
     </div>
   </div>`;
@@ -251,6 +251,14 @@ $(document).ready(function () {
     );
     yelpData = await response.json();
     yourDatePicker(yelpData);
+
+      document.querySelector(".call-modal").addEventListener('click', () => {
+        // Functions to open and close a modal
+        function openModal($el) {
+          $el.classList.add('is-active');
+        }
+      });
+      
     userCity = "";
     resultDateArray = [];
     yelpData = "";
@@ -295,4 +303,45 @@ $(document).ready(function () {
     };
     console.log(reviews);
   }
-});
+
+  
+  
+    function closeModal($el) {
+      $el.classList.remove('is-active');
+    }
+  
+    function closeAllModals() {
+      (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+        closeModal($modal);
+      });
+    }
+  
+    // Add a click event on buttons to open a specific modal
+    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+      const modal = $trigger.dataset.target;
+      const $target = document.getElementById(modal);
+  
+      $trigger.addEventListener('click', () => {
+        openModal($target);
+      });
+    });
+  
+    // Add a click event on various child elements to close the parent modal
+    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+      const $target = $close.closest('.modal');
+  
+      $close.addEventListener('click', () => {
+        closeModal($target);
+      });
+    });
+  
+    // Add a keyboard event to close all modals
+    document.addEventListener('keydown', (event) => {
+      const e = event || window.event;
+  
+      if (e.keyCode === 27) { // Escape key
+        closeAllModals();
+      }
+    });
+  });
+// });

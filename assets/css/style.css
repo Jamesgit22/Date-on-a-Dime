@@ -251,7 +251,7 @@ p.hour,
     background-color: #0c1019;
 } 
 
-.bar{
+.bar {
   color: #0c1019;
   background-color: #25bde4 ;
   border: 1px solid #0c1019;
@@ -278,6 +278,7 @@ border-radius: 8px;
    background-blend-mode: luminosity;
 }
 
+
 .body { 
    background-image: url(../images/gh-032620-fun-date-ideas-1585248446.png);   
     background-size: cover;
@@ -285,6 +286,8 @@ border-radius: 8px;
     background-position: center;
     width: 100vw;
     height: 100vh;
+
+
 } 
 
 #overlayfav {
@@ -325,8 +328,9 @@ border-radius: 8px;
 
 #redo { 
     text-align: center;
-    background-color: #0c1019; 
+    background-color: #0c1019;
     color: #7adff9;
     margin: 1%;
+
 }
 
