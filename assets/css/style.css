@@ -111,7 +111,7 @@ nav {
 
 #start-card {
     width: 350px;
-    height: 255px;
+    height: 270px;
     align-self: center;
     margin-left: 4em;
     background-color: #0000005e; 
@@ -178,6 +178,53 @@ nav {
     border-color: red;
 }
 
-.loccard {
-    width: 20%;
+h1#cityName {
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-bottom: 2%;
 }
+
+p.temp-2,
+.temp,
+.temp-1 {
+    font-weight: bold;
+}
+
+p.hour,
+.hour-1,
+.hour-2 {
+    font-weight: bold;
+    font-size: large;
+}
+
+.hourBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.weatherDataContainer {
+    border: 1px solid #452c3442;
+}
+
+.weather1,
+.weather2,
+.weather3 {
+    padding-inline: 25px;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.weather1,
+.weather2 {
+    border-right: 1px solid #452c3442;
+}
+
+#outdoorBtn,
+#indoorBtn,
+#supriseBtn {
+    margin-top: 15px;
+}
+
