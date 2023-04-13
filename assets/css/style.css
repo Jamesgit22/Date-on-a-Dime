@@ -316,31 +316,35 @@ p.hour,
 }
 
 #main-logo {
-    width: 30%;
+    width: 20%;
+    margin: 10px auto;
+    display: block;
 }
 
 #yelp-img {
-    width: 85%;
+    width: 70%;
     margin: 0 auto 15px auto;
     border: solid 1px var(--dark-brown);
     border-radius: 5px;
-    max-height: 500px;
+    max-height: 400px;
+    
 }
 
 #name-rating {
     justify-content: center;
-    font-size: 30px;
+    font-size: 15px;
     font-weight: bold;
 }
 
 .modal-content h4 {
-    margin-top: 15px;
+    margin-top: 5px;
     margin-left: 10px;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 .modal-content p {
     margin: 0px 10px 15px 10px;
+    font-size: 15px;
 }
 
 #modal-btns a {
