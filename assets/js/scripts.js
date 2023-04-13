@@ -1,92 +1,37 @@
 // A $( document ).ready() block.
-const now = dayjs()
+const now = dayjs();
 $(document).ready(function () {
   console.log("ready!");
 
   let userInput = document.querySelector(`#location-input`);
-  let cityName = document.querySelector(`#cityName`);
-  let iconEl = document.querySelector(`#icon`);
-  let tempEl = document.querySelector(`.temp`);
-  let hourEl = document.querySelector(`.hour`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
   let startContainer = document.querySelector(`#start-container`);
+  let dateData;
+  let dateType;
+  let userCity;
+  let yelpData;
 
   //  Arrays for Yelp Search categories
-  let outdoorDates = ["parks", "tours", "active"];
-  let foodDates = ["restaurants", "gourmet", "tastingclasses"];
+  let adventureDates = ["escapegames", "tours", "active", "festivals"];
+  let relaxedDates = ["parks"];
   let lightHeartDates = [
     "artsandcrafts",
     "petstores",
     "media",
     "movietheaters",
+    "museums",
+    "arts",
   ];
-  let artsDates = ["museums", "arts", "photographers"];
-  let nightLifeDates = ["bars", "nightlife"];
+  let romanticDates = [
+    "restaurants",
+    "gourmet",
+    "photographers",
+    "tastingclasses",
+  ];
 
   // check local storage for stored items
   const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
-
-  // Fetch data from Yelp Fusion
-  async function getJSONData() {
-    const response = await fetch(
-      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${userCity}&radius=20000&categories=arts&sort_by=best_match&limit=10`,
-      {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer 6qR4_DRix9tgxR-wMhc5CZxksBaAi7-kad8A147whk73CqEO0g_2KhKnIyk8PkGGMuZAQIBF3VNetKKXTuqg1g0B-2dDLnu9FPV8-IA-j7W5fhsh5Jm_6-i-1S80ZHYx",
-        },
-      }
-    );
-    const jsonData = await response.json();
-    console.log(jsonData);
-  }
-
-  // Fetch data from Open Weather API
-  $(`#searchBtn`).click(function (event) {
-    startContainer.classList.add(`hidden`);
-    mainContainer.classList.add(`hidden`);
-    locationContainer.classList.remove(`hidden`);
-
-    event.preventDefault();
-
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`)
-      .then((response) => response.json())
-      .then(data => {
-        console.log(data)
-        const { temp } = data.list[0].main
-        const location = data.city.name
-        const { icon } = data.list[0].weather[0]
-        const { dt } = data.list[0]
-
-        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
-
-        const time =  dayjs.unix(dt).format('h A');
-        hourEl.innerText = time;
-        iconEl.src = iconUrl;
-        cityName.innerText = `Todays Forecast in ` + location + `:`
-        tempEl.innerText = `Temp: ` + temp + ` °F`
-        
-        for (let i = 1; i < data.list.length; i++) {
-          let currHour = data.list[i];
-          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`
-          console.log(temp);
-          console.log(currHour);
-          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs.unix(currHour.dt).format('h A')}`;
-          document.querySelector(`.temp-${i}`).innerText = `Temp: ` + currHour.main.temp + ` °F`
-          document.querySelector(`#icon-${i}`).src = Url
-      }
-    })
-
-  });
-
-  // Check for click events on the navbar burger icon
-  $(".navbar-burger").click(function () {
-    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-    // $(".navbar-burger").toggleClass("is-active");
-    $(".navbar-menu").toggleClass("is-active");
-  });
 
   // Click event for Welcome button to hide first welcome card
   document.querySelector("#start-btn").addEventListener("click", function (e) {
@@ -95,57 +40,121 @@ $(document).ready(function () {
     const bgColor = document.querySelector("#overlay");
     startCard.setAttribute("style", "display: none;");
     bgColor.setAttribute("style", "background-color: #452C34;");
+
     locationCard();
-  });
-
-  // Click event for choosing an outdoor date
-  document.querySelector("#click-outdoor").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC()
-    outdoorCard();
-  });
-
-  // Click event for choosing an indoor date
-  document.querySelector("#click-indoor").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC();
-    indoorCard();
-  });
-
-  // Click event for choosing Relaxing Outdoor date
-  document.querySelector("#click-relax").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC();
-    // Call modal with result
-  });
-
-  // Click event for choosing Adventure Outdoor date
-  document.querySelector("#click-adven").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC();
-    // Call modal with result
-  });
-
-  // Click event for choosing lightheart Indoor date
-  document.querySelector("#click-lightheart").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC();
-    // Call modal with result
-  });
-
-  // Click event for choosing Romantic Indoor date
-  document.querySelector("#click-roman").addEventListener("click", function (e) {
-    e.stopPropagation();
-    clearMainC();
-    // Call modal with result
   });
 
   // Show main container to ask user location
   function locationCard() {
-    const locationCardCont = document.querySelector("#main-container");
-    locationCardCont.classList.remove("hidden");
+    let mainCont = document.querySelector(`#main-container`);
+    mainCont.classList.remove(`hidden`);
+    //Click event for clicking search button after inputting city
+    $(`#searchBtn`).click(function (e) {
+      e.stopPropagation();
+      userCity = document.querySelector(`#location-input`).value;
+      console.log(userCity);
+      weatherCardFunc();
+    });
   }
 
+  function weatherCardFunc() {
+    clearMainC();
+    document.querySelector(
+      "#main-card"
+    ).innerHTML = ` <div class="card-content">
+    <h1 id="cityName">Today's Forecast</h1>
+    <div class="weatherDataContainer">
+      <div class="hourBlock">
+      <div class="weather1">
+        <p class="hour">Hour</p>
+        <img src="" alt="" id="icon">
+        <p class="temp">Temp</p>
+      </div>
+      <div class="weather2">
+        <p class="hour-1">Hour</p>
+        <img src="" alt="" id="icon-1">
+        <p class="temp-1">Temp</p>
+      </div>
+      <div class="weather3">
+        <p class="hour-2">Hour</p>
+        <img src="" alt="" id="icon-2">
+        <p class="temp-2">Temp</p>
+      </div>
+      </div>
+     </div> 
+     <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
+      <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
+      <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
+  </div>`;
+    weatherFetch();
+
+    // Click event for choosing an outdoor date
+    $("#outdoorBtn").on("click", function (e) {
+      e.stopPropagation();
+      clearMainC();
+      outdoorCard();
+    });
+
+    // Click event for choosing an indoor date
+    $("#indoorBtn").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      indoorCard();
+    });
+  }
+
+  function weatherFetch() {
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
+    )
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Please enter a valid city name. Error ' + response.status);
+      } return response.json();
+      })
+
+      .then((data) => {
+        console.log(data);
+        const { temp } = data.list[0].main;
+        const location = data.city.name;
+        const { icon } = data.list[0].weather[0];
+        const { dt } = data.list[0];
+
+        const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+        const hourEl = document.querySelector(`.hour`);
+        const iconEl = document.querySelector(`#icon`);
+        const cityName = document.querySelector(`#cityName`);
+        const tempEl = document.querySelector(`.temp`);
+        const time = dayjs.unix(dt).format("h A");
+        
+        console.log(time);
+        hourEl.innerText = time;
+        iconEl.src = iconUrl;
+        cityName.innerText =  location + `'s Forecast:`;
+        tempEl.innerText = `Temp: ` + Math.round(temp) + ` °F`;
+
+      
+        for (let i = 1; i < data.list.length; i++) {
+          let currHour = data.list[i];
+          const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`;
+          console.log(temp);
+          console.log(currHour);
+          document.querySelector(`.hour-${i}`).innerHTML = `${dayjs
+            .unix(currHour.dt)
+            .format("h A")}`;
+          document.querySelector(`.temp-${i}`).innerText =
+            `Temp: ` + Math.round(currHour.main.temp) + ` °F`;
+          document.querySelector(`#icon-${i}`).src = Url;
+        }
+       
+      })
+      .catch(error => {
+        alert(error.message);
+        document.location.href="./index.html";
+      }); 
+  }
+ 
   function clearMainC() {
     document.querySelector("#main-card").innerHTML = ``;
   }
@@ -160,18 +169,103 @@ $(document).ready(function () {
       </div>
     </div>
   </div>`;
+
+    // Click event for choosing Relaxing Outdoor date
+    $("#click-relax").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "relax";
+      checkDateType();
+    });
+
+    // Click event for choosing Adventure Outdoor date
+    $("#click-adven").click(function (e) {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "adven";
+      checkDateType();
+    });
   }
 
   function indoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <h1 class="txt-dbrown">For your indoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
         <button id="click-light" class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
         <button id="click-roman" class="button is-warning is-light" data-indoor="romantic">Romantic</button>
       </div>
     </div>
   </div>`;
-  }
-});
 
+    // Click event for choosing lightheart Indoor date
+    $("#click-light").click(function (e) {
+      e.stopPropagation();
+      dateData = "lightheart";
+      clearMainC();
+      checkDateType();
+    });
+
+    // Click event for choosing Romantic Indoor date
+    $("#click-roman").click(function (e) {
+      e.stopPropagation();
+      dateData = "roman";
+      clearMainC();
+      checkDateType();
+    });
+  }
+
+  // check what type of date the user choose
+  function checkDateType() {
+    if (dateData == "relax") {
+      dateType = relaxedDates;
+      pickCategory(dateType);
+    } else if (dateData == "adven") {
+      dateType = adventureDates;
+      pickCategory(dateType);
+    } else if (dateData == "lightheart") {
+      dateType = lightHeartDates;
+      pickCategory(dateType);
+    } else if (dateData == "roman") {
+      dateType = romanticDates;
+      pickCategory(dateType);
+    }
+    console.log(dateData);
+  }
+
+  // Fetch data from Yelp Fusion
+  async function getYelpData(city, type) {
+    const response = await fetch(
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=best_match&limit=10`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer 6qR4_DRix9tgxR-wMhc5CZxksBaAi7-kad8A147whk73CqEO0g_2KhKnIyk8PkGGMuZAQIBF3VNetKKXTuqg1g0B-2dDLnu9FPV8-IA-j7W5fhsh5Jm_6-i-1S80ZHYx",
+        },
+      }
+    );
+    yelpData = await response.json();
+    yourDatePicker(yelpData);
+    userCity = "";
+    resultDateArray = [];
+    yelpData = "";
+    finalDate = "";
+  }
+
+  let pickCategory = (array) => {
+    let i = Math.floor(Math.random() * array.length);
+    const resultDateArray = array[i];
+    getYelpData(userCity, resultDateArray);
+    console.log(resultDateArray);
+  };
+
+  // Choose final date result from Yelp JSON options
+  let yourDatePicker = () => {
+    console.log(yelpData);
+    let i = Math.floor(Math.random() * 10);
+    const finalDate = yelpData.businesses[i].name;
+    console.log(finalDate);
+  };
+
+});
