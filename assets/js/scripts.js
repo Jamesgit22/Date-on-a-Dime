@@ -11,6 +11,7 @@ $(document).ready(function () {
   let dateType;
   let userCity;
   let yelpData;
+  let reviews;
 
   //  Arrays for Yelp Search categories
   let adventureDates = ["escapegames", "tours", "active", "festivals"];
@@ -104,14 +105,16 @@ $(document).ready(function () {
   }
 
   function weatherFetch() {
-
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${userInput.value}&appid=a7a1b26928245e448876bae028d3ffe6&cnt=3&units=imperial`
     )
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Please enter a valid city name. Error ' + response.status);
-      } return response.json();
+          throw new Error(
+            "Please enter a valid city name. Error " + response.status
+          );
+        }
+        return response.json();
       })
 
       .then((data) => {
@@ -127,14 +130,13 @@ $(document).ready(function () {
         const cityName = document.querySelector(`#cityName`);
         const tempEl = document.querySelector(`.temp`);
         const time = dayjs.unix(dt).format("h A");
-        
+
         console.log(time);
         hourEl.innerText = time;
         iconEl.src = iconUrl;
-        cityName.innerText =  location + `'s Forecast:`;
+        cityName.innerText = location + `'s Forecast:`;
         tempEl.innerText = `Temp: ` + Math.round(temp) + ` °F`;
 
-      
         for (let i = 1; i < data.list.length; i++) {
           let currHour = data.list[i];
           const Url = `https://openweathermap.org/img/wn/${currHour.weather[0].icon}@2x.png`;
@@ -147,22 +149,23 @@ $(document).ready(function () {
             `Temp: ` + Math.round(currHour.main.temp) + ` °F`;
           document.querySelector(`#icon-${i}`).src = Url;
         }
-       
       })
-      .catch(error => {
+      .catch((error) => {
         alert(error.message);
-        document.location.href="./index.html";
-      }); 
+        document.location.href = "./index.html";
+      });
   }
- 
+
+  // Clear the html content in the main card
   function clearMainC() {
     document.querySelector("#main-card").innerHTML = ``;
   }
 
+  // Create html content if user selects an outdoor date
   function outdoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your outdoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <h1 class="txt-dbrown">For your date outdoors, would you like to<br> stay relaxed or go on an adventure? </h1>
       <div>
         <button id="click-relax" class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
         <button id="click-adven" class="button is-warning is-light" data-outdoor="adventure">Adventure</button>
@@ -187,10 +190,11 @@ $(document).ready(function () {
     });
   }
 
+  // Create html content if user selects an indoor date
   function indoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your indoors date, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <h1 class="txt-dbrown">For your date indoors, would you like to<br> have a light hearted date or something more romantic? </h1>
       <div>
         <button id="click-light" class="button is-warning is-light" data-indoor="lightheart">Light Hearted</button>
         <button id="click-roman" class="button is-warning is-light" data-indoor="romantic">Romantic</button>
@@ -236,7 +240,7 @@ $(document).ready(function () {
   // Fetch data from Yelp Fusion
   async function getYelpData(city, type) {
     const response = await fetch(
-      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=best_match&limit=10`,
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&radius=20000&categories=${type}&sort_by=rating&limit=10`,
       {
         method: "GET",
         headers: {
@@ -265,7 +269,30 @@ $(document).ready(function () {
     console.log(yelpData);
     let i = Math.floor(Math.random() * 10);
     const finalDate = yelpData.businesses[i].name;
+    const rating = yelpData.businesses[i].rating;
+    const reviewObj = yelpData.businesses[i].id;
+    console.log(rating);
     console.log(finalDate);
+    getReviews(reviewObj);
   };
 
+  // Get reviews for the result date
+  async function getReviews(id) {
+    const response = await fetch(
+      `https://floating-headland-95050.herokuapp.com/https://api.yelp.com/v3/businesses/${id}/reviews?limit=3&sort_by=yelp_sort`,
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer 6qR4_DRix9tgxR-wMhc5CZxksBaAi7-kad8A147whk73CqEO0g_2KhKnIyk8PkGGMuZAQIBF3VNetKKXTuqg1g0B-2dDLnu9FPV8-IA-j7W5fhsh5Jm_6-i-1S80ZHYx",
+        },
+      }
+    );
+    const reviewsData = await response.json();
+    reviews = {
+      reviewOne: reviewsData.reviews[0].text,
+      reviewTwo: reviewsData.reviews[1].text,
+    };
+    console.log(reviews);
+  }
 });
