@@ -1,5 +1,5 @@
 // A $( document ).ready() block.
-const now = dayjs();
+
 $(document).ready(function () {
   console.log("ready!");
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
   ];
 
   // check local storage for stored items
-  const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
+  // const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
 
   // Click event for Welcome button to hide first welcome card
   document.querySelector("#start-btn").addEventListener("click", function (e) {
@@ -275,6 +275,13 @@ $(document).ready(function () {
       "#date-name"
     ).textContent = `${finalDate} ${"- Rating:"} ${rating}`;
     getReviews(reviewObj);
+    const favBtn = document.querySelector(`#modal-fav-btn`)
+
+    favBtn.addEventListener("click", function () {
+      let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
+      storage.push(finalDate)
+      localStorage.setItem(`favorites`, JSON.stringify(storage))
+    })
   };
 
   // Get reviews for the result date
@@ -301,9 +308,5 @@ $(document).ready(function () {
   function openModal() {
     let unhide = document.querySelector("#modal-real");
     unhide.classList.add("is-active");
-  }
+  } 
 });
-
-// let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
-// storage.push(finalDate.value)
-// localStorage.setItem(`favorites`, JSON.stringify(storage))
