@@ -290,8 +290,15 @@ $(document).ready(function () {
     };
   }
 
-  });
+  function openModal() {
+    let unhide = document.querySelector("#modal-real");
+    unhide.classList.add('is-active');
+  }
+
+});
+
 
   // let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
   // storage.push(finalDate.value)
   // localStorage.setItem(`favorites`, JSON.stringify(storage))
+
