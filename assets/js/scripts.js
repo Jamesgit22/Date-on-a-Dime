@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
      </div> 
      <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
-      <button id="supriseBtn" class="button is-warning is-light">Surprise Me!</button>
+      <button id="surpriseBtn" class="button is-warning is-light">Surprise Me!</button>
       <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
   </div>`;
     weatherFetch();
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
     // Click event for choosing a random date
-    document.querySelector("#supriseBtn").addEventListener("click", (e) => {
+    document.querySelector("#surpriseBtn").addEventListener("click", (e) => {
       e.stopPropagation();
       clearMainC();
       dateData = "random";
