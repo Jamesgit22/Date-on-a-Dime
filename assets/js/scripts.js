@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // const storedDates = JSON.parse(localStorage.getItem("favorites")) || [];
 
   // Click event for Welcome button to hide first welcome card
-  document.querySelector("#start-btn").addEventListener("click", function (e) {
+  document.querySelector("#start-btn").addEventListener("click", function(e) {
     e.stopPropagation();
     const startCard = document.querySelector("#start-card");
     const bgColor = document.querySelector("#overlay");
