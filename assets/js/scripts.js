@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let reviews;
 
   //  Arrays for Yelp Search categories
-  let adventureDates = ["escapegames", "tours", "active", "festivals"];
+  let adventureDates = ["escapegames", "tours", "festivals"];
   let relaxedDates = ["parks"];
   let lightHeartDates = [
     "artsandcrafts",
@@ -23,6 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
     "arts",
   ];
   let romanticDates = [
+    "restaurants",
+    "gourmet",
+    "photographers",
+    "tastingclasses",
+  ];
+  let randomDates = [
+    "escapegames",
+    "tours",
+    "festivals",
+    "parks",
+    "artsandcrafts",
+    "petstores",
+    "media",
+    "movietheaters",
+    "museums",
+    "arts",
     "restaurants",
     "gourmet",
     "photographers",
@@ -83,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
      </div> 
      <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
-      <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
+      <button id="supriseBtn" class="button is-warning is-light">Surprise Me!</button>
       <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
   </div>`;
     weatherFetch();
@@ -105,6 +121,15 @@ document.addEventListener("DOMContentLoaded", function () {
         clearMainC();
         indoorCard();
       });
+
+    // Click event for choosing a random date
+    document.querySelector("#supriseBtn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      clearMainC();
+      dateData = "random";
+      checkDateType();
+      openModal();
+    });
   }
 
   function weatherFetch() {
@@ -171,22 +196,26 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>`;
 
     // Click event for choosing Relaxing Outdoor date
-    document.querySelector("#click-relax").addEventListener("click", function (e) {
-      e.stopPropagation();
-      clearMainC();
-      dateData = "relax";
-      checkDateType();
-      openModal();
-    });
+    document
+      .querySelector("#click-relax")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        clearMainC();
+        dateData = "relax";
+        checkDateType();
+        openModal();
+      });
 
     // Click event for choosing Adventure Outdoor date
-    document.querySelector("#click-adven").addEventListener("click", function (e) {
-      e.stopPropagation();
-      clearMainC();
-      dateData = "adven";
-      checkDateType();
-      openModal();
-    });
+    document
+      .querySelector("#click-adven")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        clearMainC();
+        dateData = "adven";
+        checkDateType();
+        openModal();
+      });
   }
 
   // Create html content if user selects an indoor date
@@ -237,6 +266,9 @@ document.addEventListener("DOMContentLoaded", function () {
       pickCategory(dateType);
     } else if (dateData == "roman") {
       dateType = romanticDates;
+      pickCategory(dateType);
+    } else if (dateData == "random") {
+      dateType = randomDates;
       pickCategory(dateType);
     }
   }
