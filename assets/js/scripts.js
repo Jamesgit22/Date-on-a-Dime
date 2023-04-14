@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const reviewsData = await response.json();
     reviews = {
       reviewOne: reviewsData.reviews[0].text,
-      reviewTwo: reviewsData.reviews[1].text,
+      reviewTwo: reviewsData.reviews[1].text
     };
     document.querySelector("#review-one").textContent = reviews.reviewOne;
     document.querySelector("#review-two").textContent = reviews.reviewTwo;
