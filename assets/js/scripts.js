@@ -1,8 +1,6 @@
-// A $( document ).ready() block.
+// A  document .ready() block.
 
-$(document).ready(function () {
-  console.log("ready!");
-
+document.addEventListener("DOMContentLoaded", function () {
   let userInput = document.querySelector(`#location-input`);
   let locationContainer = document.querySelector(`#location-container`);
   let mainContainer = document.querySelector(`#main-container`);
@@ -50,11 +48,13 @@ $(document).ready(function () {
     let mainCont = document.querySelector(`#main-container`);
     mainCont.classList.remove(`hidden`);
     //Click event for clicking search button after inputting city
-    $(`#searchBtn`).click(function (e) {
-      e.stopPropagation();
-      userCity = document.querySelector(`#location-input`).value;
-      weatherCardFunc();
-    });
+    document
+      .querySelector(`#searchBtn`)
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        userCity = document.querySelector(`#location-input`).value;
+        weatherCardFunc();
+      });
   }
 
   function weatherCardFunc() {
@@ -89,18 +89,22 @@ $(document).ready(function () {
     weatherFetch();
 
     // Click event for choosing an outdoor date
-    $("#outdoorBtn").on("click", function (e) {
-      e.stopPropagation();
-      clearMainC();
-      outdoorCard();
-    });
+    document
+      .querySelector("#outdoorBtn")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        clearMainC();
+        outdoorCard();
+      });
 
     // Click event for choosing an indoor date
-    $("#indoorBtn").click(function (e) {
-      e.stopPropagation();
-      clearMainC();
-      indoorCard();
-    });
+    document
+      .querySelector("#indoorBtn")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        clearMainC();
+        indoorCard();
+      });
   }
 
   function weatherFetch() {
@@ -167,7 +171,7 @@ $(document).ready(function () {
     </div>`;
 
     // Click event for choosing Relaxing Outdoor date
-    $("#click-relax").click(function (e) {
+    document.querySelector("#click-relax").addEventListener("click", function (e) {
       e.stopPropagation();
       clearMainC();
       dateData = "relax";
@@ -176,7 +180,7 @@ $(document).ready(function () {
     });
 
     // Click event for choosing Adventure Outdoor date
-    $("#click-adven").click(function (e) {
+    document.querySelector("#click-adven").addEventListener("click", function (e) {
       e.stopPropagation();
       clearMainC();
       dateData = "adven";
@@ -198,22 +202,26 @@ $(document).ready(function () {
   </div>`;
 
     // Click event for choosing lightheart Indoor date
-    $("#click-light").click(function (e) {
-      e.stopPropagation();
-      dateData = "lightheart";
-      clearMainC();
-      checkDateType();
-      openModal();
-    });
+    document
+      .querySelector("#click-light")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        dateData = "lightheart";
+        clearMainC();
+        checkDateType();
+        openModal();
+      });
 
     // Click event for choosing Romantic Indoor date
-    $("#click-roman").click(function (e) {
-      e.stopPropagation();
-      dateData = "roman";
-      clearMainC();
-      checkDateType();
-      openModal();
-    });
+    document
+      .querySelector("#click-roman")
+      .addEventListener("click", function (e) {
+        e.stopPropagation();
+        dateData = "roman";
+        clearMainC();
+        checkDateType();
+        openModal();
+      });
   }
 
   // check what type of date the user choose
@@ -275,13 +283,13 @@ $(document).ready(function () {
       "#date-name"
     ).textContent = `${finalDate} ${"- Rating:"} ${rating}`;
     getReviews(reviewObj);
-    const favBtn = document.querySelector(`#modal-fav-btn`)
+    const favBtn = document.querySelector(`#modal-fav-btn`);
 
     favBtn.addEventListener("click", function () {
-      let storage = JSON.parse(localStorage.getItem(`favorites`)) || []
-      storage.push(finalDate)
-      localStorage.setItem(`favorites`, JSON.stringify(storage))
-    })
+      let storage = JSON.parse(localStorage.getItem(`favorites`)) || [];
+      storage.push(finalDate);
+      localStorage.setItem(`favorites`, JSON.stringify(storage));
+    });
   };
 
   // Get reviews for the result date
@@ -308,5 +316,5 @@ $(document).ready(function () {
   function openModal() {
     let unhide = document.querySelector("#modal-real");
     unhide.classList.add("is-active");
-  } 
+  }
 });
