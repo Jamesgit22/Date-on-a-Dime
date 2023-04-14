@@ -1,33 +1,23 @@
 # Date-on-a-Dime
 
-A webapp to get you on a date instead of trying to think of what to do.
-
-
-
 
 ## Description
 
-Welcome to our first ever webapp project! Date on a dime is a webapp project we created to help users find date ideas, from romantic to being adventurous. So what are you waiting for? Help us find you a new 
-date idea! Date a dime was built on API, CSS, HTML, and Java. Enjoy!
-
-
-
+Welcome to our first web application, Date on a Dime! We've designed this project to assist users in discovering a range of date ideas, from romantic to adventurous. Don't wait any longer, let us help you find your next perfect date idea. Date on a Dime is built with technologies such as API, CSS, Bulma, HTML, and JavaScript, ensuring you a seamless and enjoyable experience. Enjoy!
 
 
 ## Usage
 
-Date on a dime is to help users to find new date ideas, from eating new places to discover, from being romatic, to being outdoors/adventurous
-
-[Date on a Dime](https://ashleyg5.github.io/Coding-Quiz/)
+[Date on a Dime](https://jamesgit22.github.io/Date-on-a-Dime/)
 
 
-![Alt text](assets/images/Screenshot%20at%20Apr%2013%2010-20-23.png)
+![Homepage](https://user-images.githubusercontent.com/118938942/232068799-852e792f-eb23-46a1-a257-c21b902724c1.png)
 ---
 
-![Alt text](assets/images/Screenshot%20at%20Apr%2013%2010-20-47.png)
+![Location Input](https://user-images.githubusercontent.com/118938942/232069051-9755b2ea-7718-42ff-925b-26e6e6e8337c.png)
 ---
 
-![Alt text](assets/images/Screenshot%20at%20Apr%2013%2010-21-00.png)
+![City Forecast](https://user-images.githubusercontent.com/118938942/232069154-be58054d-6b9e-4b43-9c00-cb481a16a699.png)
 ---
 
 ![Alt text](assets/images/Screenshot%20at%20Apr%2013%2010-21-26.png)
@@ -40,53 +30,45 @@ Date on a dime is to help users to find new date ideas, from eating new places t
 
 ## Credits
 
-collaborators that worked on the project:
----
-https://github.com/Jamesgit22
----
+Project Collaborators
 
-https://github.com/Ashleyg5
+[James Schroeder](https://github.com/Jamesgit22)
 ---
 
-https://github.com/MikeK1639
+[Ashley Giraldo](https://github.com/Ashleyg5)
 ---
 
-https://github.com/jalvarez322
+[Michael Kent](https://github.com/MikeK1639)
 ---
 
-
-
+[Julio Alvarez](https://github.com/jalvarez322)
+---
 
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
-
+MIT
 
 
 ## Technologies
+
 API's we used for our project
+
+[Yelp API](https://docs.developer.yelp.com/docs/fusion-intro)
 ---
 
-https://docs.developer.yelp.com/docs/fusion-intro
----
-
-https://openweathermap.org/forecast5
+[Openweather](https://openweathermap.org/forecast5)
 ---
 
 
 ## Resources
 
-Resources we utlizied for our project:
+[Resource 1](https://docs.developer.yelp.com/docs/fusion-intro)
 ---
 
-Yelp Fusion: https://docs.developer.yelp.com/docs/fusion-intro
+[Resource 2](https://logo.com)
 ---
 
-OpenWeather API: https://openweathermap.org/forecast5
----
-
-Bulma CSS: https://bulma.io/documentation/
+[Resource 3](https://bulma.io/documentation/)
 ---
 
