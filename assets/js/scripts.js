@@ -83,7 +83,7 @@ $(document).ready(function () {
       </div>
      </div> 
      <button id="outdoorBtn" class="button is-warning is-light">Outdoor</button>
-      <button id="supriseBtn" class="button is-warning is-light">Suprise Me!</button>
+      <button id="surpriseBtn" class="button is-warning is-light">Surprise Me!</button>
       <button id="indoorBtn" class="button is-warning is-light">Indoor</button>
   </div>`;
     weatherFetch();
@@ -159,7 +159,7 @@ $(document).ready(function () {
   function outdoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your date outdoors, would you like to<br> stay relaxed or go on an adventure? </h1>
+      <h1 class="txt-dbrown">Would you prefer a relaxed outdoor date <br> or an adventurous one?</h1>
       <div>
         <button id="click-relax" class="button is-warning is-light" data-outdoor="relaxed">Relaxed</button>
         <button id="click-adven" class="button is-warning is-light">Adventure</button>
@@ -189,7 +189,7 @@ $(document).ready(function () {
   function indoorCard() {
     document.querySelector("#main-card").innerHTML = `<div class="card-content">
     <div class="content">
-      <h1 class="txt-dbrown">For your date indoors, would you like to<br> have a light hearted date or something more romantic? </h1>
+      <h1 class="txt-dbrown">Would you prefer a light hearted indoor <br> date or a romantic one?</h1>
       <div>
         <button id="click-light" class="button is-warning is-light call-modal" data-indoor="lightheart">Light Hearted</button>
         <button id="click-roman" class="button is-warning is-light call-modal " data-indoor="romantic">Romantic</button>
