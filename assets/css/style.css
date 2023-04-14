@@ -279,7 +279,7 @@ p.hour,
 }
 
 #favdate-card {
-    width: 30%;
+    width: 40%;
     min-height: 270px;
     height: fit-content;
     margin-top: 5%;
@@ -361,4 +361,51 @@ p.hour,
 
 button.clearBtn {
     margin-top: 30px;
+}
+
+/* Media */
+
+@media only screen and (max-width: 1100px) {
+    #favdate-card {
+        width: 80%;
+    }
+
+    #start-card {
+        margin: 0 auto;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    #start-card {
+        width: 80%;
+    }
+
+    #modal-card {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #favdate-card {
+        width: 95%;
+        margin-top: 60px;
+        height: fit-content;
+    }
+
+    #start-card {
+        width: 95%;
+        height: fit-content
+    }
+
+    #main-card {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    #searchBtn {
+        margin-top: 10px;
+    }
+
+    
 }
