@@ -287,10 +287,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     yelpData = await response.json();
     yourDatePicker(yelpData);
-    userCity = "";
-    resultDateArray = [];
-    yelpData = "";
-    finalDate = "";
   }
 
   let pickCategory = (array) => {
@@ -317,11 +313,19 @@ document.addEventListener("DOMContentLoaded", function () {
     getReviews(reviewObj);
     const favBtn = document.querySelector(`#modal-fav-btn`);
 
-    favBtn.addEventListener("click", function () {
+    favBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
       let storage = JSON.parse(localStorage.getItem(`favorites`)) || [];
       storage.push(finalDate);
       localStorage.setItem(`favorites`, JSON.stringify(storage));
     });
+
+    document
+      .querySelector("#modal-reroll-btn")
+      .addEventListener("click", (e) => {
+        e.stopPropagation();
+        yourDatePicker();
+      });
   };
 
   // Get reviews for the result date
