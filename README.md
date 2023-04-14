@@ -10,14 +10,16 @@ A webapp to get you on a date instead of trying to think of what to do.
 Welcome to our first ever webapp project! Date on a dime is a webapp project we created to help users find date ideas, from romantic to being adventurous. So what are you waiting for? Help us find you a new 
 date idea! Date a dime was built on API, CSS, HTML, and Java. Enjoy!
 
-Link to repository
-https://github.com/Jamesgit22/Date-on-a-Dime
+
 
 
 
 ## Usage
 
 Date on a dime is to help users to find new date ideas, from eating new places to discover, from being romatic, to being outdoors/adventurous
+
+[Date on a Dime](https://ashleyg5.github.io/Coding-Quiz/)
+
 
 ![Alt text](assets/images/Screenshot%20at%20Apr%2013%2010-20-23.png)
 ---
