@@ -1,7 +1,8 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"; 
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
 * {
-    font-family: 'Poppins', sans-serif;;
+    font-family: 'Poppins', sans-serif;
+    ;
 }
 
 :root {
@@ -57,7 +58,7 @@ body {
 #logo {
     object-fit: contain;
     margin-left: -20px;
-} 
+}
 
 p.navtext {
     margin-left: -20px;
@@ -67,15 +68,16 @@ p.navtext {
 
 
 .container {
-flex-grow: 1;
-margin: 30px; 
-position: absolute; 
-width: 20%
+    flex-grow: 1;
+    margin: 30px;
+    position: absolute;
+    width: 20%
 }
 
 nav {
     border-bottom: 1px solid rgba(0, 0, 0, 0.336);
 }
+
 .navbar-item img {
     max-height: 2.5rem;
 }
@@ -116,7 +118,7 @@ nav {
     height: 270px;
     align-self: center;
     margin-left: 4em;
-    background-color: #0000005e; 
+    background-color: #0000005e;
     color: whitesmoke;
     border: solid 1px rgba(255, 255, 255, 0.475);
     border-radius: 1em;
@@ -232,19 +234,19 @@ p.hour,
 
 .loccard {
     width: 20%;
-} 
+}
 
-.panel {  
+.panel {
     background-size: contain;
     align-items: center;
     background-repeat: round;
     width: 100%;
-    height: 100%; 
+    height: 100%;
     background-color: var(--dark-brown);
-} 
+}
 
 .panel-block {
-    border-bottom: none!important;
+    border-bottom: none !important;
 }
 
 #bar {
@@ -256,12 +258,12 @@ p.hour,
 }
 
 .navver {
-   background-blend-mode: luminosity;
+    background-blend-mode: luminosity;
 }
 
 
-.body { 
-   background-image: url(../images/gh-032620-fun-date-ideas-1585248446.png);   
+.body {
+    background-image: url(../images/gh-032620-fun-date-ideas-1585248446.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -269,7 +271,7 @@ p.hour,
     height: 100vh;
 
 
-} 
+}
 
 #overlayfav {
     background-blend-mode: overlay;
@@ -281,7 +283,7 @@ p.hour,
     min-height: 270px;
     height: fit-content;
     margin-top: 5%;
-    background-color: #0000005e; 
+    background-color: #0000005e;
     color: whitesmoke;
     border: solid 1px rgba(255, 255, 255, 0.475);
     border-radius: 1em;
@@ -291,7 +293,7 @@ p.hour,
 #favdate-card ul {
     font-weight: bold;
     border-top: solid 1px rgba(255, 255, 255, 0.475);
-    margin: 0 auto!important;
+    margin: 0 auto !important;
 }
 
 #favdate-card li {
@@ -308,7 +310,7 @@ p.hour,
 
 }
 
-#redo { 
+#redo {
     text-align: center;
     color: var(--champaign);
     padding: 1%;
@@ -328,7 +330,7 @@ p.hour,
     border: solid 1px var(--dark-brown);
     border-radius: 5px;
     max-height: 400px;
-    
+
 }
 
 #name-rating {
@@ -352,9 +354,9 @@ p.hour,
     margin: 0px 6px 20px 0px;
 }
 
-#yelp-logo { 
-   border-radius: 5em;
-    
+#yelp-logo {
+    border-radius: 5em;
+
 }
 
 button.clearBtn {
